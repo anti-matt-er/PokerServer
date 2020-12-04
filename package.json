@@ -1,0 +1,19 @@
+{
+  "name": "pokerserver",
+  "version": "1.0.0",
+  "description": "Server for Passion Poker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anti-matt-er/PokerServer.git"
+  },
+  "author": "anti-matt-er",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anti-matt-er/PokerServer/issues"
+  },
+  "homepage": "https://github.com/anti-matt-er/PokerServer#readme"
+}
