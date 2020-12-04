@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/anti-matt-er/PokerServer/issues"
   },
-  "homepage": "https://github.com/anti-matt-er/PokerServer#readme"
+  "homepage": "https://github.com/anti-matt-er/PokerServer#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.0.3"
+  }
 }
