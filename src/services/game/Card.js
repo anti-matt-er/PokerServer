@@ -8,8 +8,8 @@ class Card {
         this.valid_suits = [
             'C', 'S', 'H', 'D'
         ];
-        this.rank = rank;
-        this.suit = suit;
+        this.rank = rank.toUpperCase();
+        this.suit = suit.toUpperCase();
         this.ten_to_t();
         this.validate();
     }
