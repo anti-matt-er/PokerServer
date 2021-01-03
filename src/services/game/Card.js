@@ -40,5 +40,17 @@ class Card {
     get v() {
         return this.value;
     }
+
+    get id() {
+        return this.rank + this.suit;
+    }
+
+    get name() {
+        return Definitions.ranks[this.rank].name + ' of ' + Definitions.suits[this.suit].name;
+    }
+
+    get name_verbose() {
+        return Definitions.ranks[this.rank].name_long + ' of ' + Definitions.suits[this.suit].name;
+    }
 }
 exports.Card = Card;
