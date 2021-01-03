@@ -10,7 +10,14 @@ class Card {
         ];
         this.rank = rank;
         this.suit = suit;
+        this.ten_to_t();
         this.validate();
+    }
+
+    ten_to_t() {
+        if (this.rank === '10') {
+            this.rank = 'T';
+        }
     }
 
     validate() {
