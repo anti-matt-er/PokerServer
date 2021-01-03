@@ -27,13 +27,13 @@ class Card {
 
     checkRank() {
         if (!this.valid_ranks.includes(this.rank)) {
-            throw 'Error constructing card: "' + this.rank + '" is an invalid rank!'
+            throw 'Error constructing card: "' + this.rank + '" is not a valid rank!'
         }
     }
 
     checkSuit() {
         if (!this.valid_suits.includes(this.suit)) {
-            throw 'Error constructing card: "' + this.suit + '" is an invalid suit!'
+            throw 'Error constructing card: "' + this.suit + '" is not a valid suit!'
         }
     }
 
