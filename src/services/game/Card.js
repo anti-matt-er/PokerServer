@@ -1,13 +1,9 @@
 'use strict';
 
+import { Definitions } from './Card_Definitions';
+
 class Card {
     constructor(rank, suit) {
-        this.valid_ranks = [
-            '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'
-        ];
-        this.valid_suits = [
-            'H', 'D', 'C', 'S'
-        ];
         this.rank = rank.toUpperCase();
         this.suit = suit.toUpperCase();
         this.ten_to_t();
@@ -26,19 +22,19 @@ class Card {
     }
 
     checkRank() {
-        if (!this.valid_ranks.includes(this.rank)) {
+        if (!Definitions.valid_ranks.includes(this.rank)) {
             throw 'Error constructing card: "' + this.rank + '" is not a valid rank!'
         }
     }
 
     checkSuit() {
-        if (!this.valid_suits.includes(this.suit)) {
+        if (!Definitions.valid_suits.includes(this.suit)) {
             throw 'Error constructing card: "' + this.suit + '" is not a valid suit!'
         }
     }
 
     get value() {
-        return this.valid_ranks.indexOf(this.rank) + 1;
+        return Definitions.ranks[this.rank].value;
     }
 
     get v() {
