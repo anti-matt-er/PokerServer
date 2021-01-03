@@ -45,3 +45,9 @@ it('should return correct values for cards', () => {
     expect(card_KH.value).toEqual(12);
     expect(card_AS.value).toEqual(13);
 });
+
+it('should allow .v as an allias of .value', () => {
+    var card = new Card('A', 'S');
+    expect(card.v).toBeDefined();
+    expect(card.v).toEqual(card.value);
+});
