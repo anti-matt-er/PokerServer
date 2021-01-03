@@ -3,7 +3,7 @@
 class Card {
     constructor(rank, suit) {
         this.valid_ranks = [
-            'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'
+            '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'
         ];
         this.valid_suits = [
             'C', 'S', 'H', 'D'
@@ -38,7 +38,7 @@ class Card {
     }
 
     get value() {
-
+        return this.valid_ranks.indexOf(this.rank) + 1;
     }
 }
 exports.Card = Card;
