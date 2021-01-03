@@ -51,3 +51,29 @@ it('should allow .v as an allias of .value', () => {
     expect(card.v).toBeDefined();
     expect(card.v).toEqual(card.value);
 });
+
+it('should allow lowercase and convert', () => {
+    var card_2C
+    var card_2S
+    var card_2H
+    var card_2D
+    var card_AS
+    var card_TS
+    
+    expect(() => {
+        card_2C = new Card('2', 'c');
+        card_2S = new Card('2', 's');
+        card_2H = new Card('2', 'h');
+        card_2D = new Card('2', 'd');
+        card_AS = new Card('a', 'S');
+        card_TS = new Card('t', 'S');
+    }).not.toThrow();
+
+    expect(card_2C.suit).toEqual('C');
+    expect(card_2S.suit).toEqual('S');
+    expect(card_2H.suit).toEqual('H');
+    expect(card_2D.suit).toEqual('D');
+
+    expect(card_AS.rank).toEqual('A');
+    expect(card_TS.rank).toEqual('T');
+});
