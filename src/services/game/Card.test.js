@@ -77,3 +77,45 @@ it('should allow lowercase and convert', () => {
     expect(card_AS.rank).toEqual('A');
     expect(card_TS.rank).toEqual('T');
 });
+
+it('should print out the id of cards on demand', () => {
+    var card_2C = new Card('2', 'C');
+    var card_4D = new Card('4', 'D');
+    var card_TD = new Card('T', 'D');
+    var card_KH = new Card('K', 'H');
+    var card_AS = new Card('A', 'S');
+
+    expect(card_2C.id).toEqual('2C');
+    expect(card_4D.id).toEqual('4D');
+    expect(card_TD.id).toEqual('TD');
+    expect(card_KH.id).toEqual('KH');
+    expect(card_AS.id).toEqual('AS');
+});
+
+it('should print out the full name of cards on demand', () => {
+    var card_2C = new Card('2', 'C');
+    var card_4D = new Card('4', 'D');
+    var card_TD = new Card('T', 'D');
+    var card_KH = new Card('K', 'H');
+    var card_AS = new Card('A', 'S');
+
+    expect(card_2C.name).toEqual('2 of Clubs');
+    expect(card_4D.name).toEqual('4 of Diamonds');
+    expect(card_TD.name).toEqual('10 of Diamonds');
+    expect(card_KH.name).toEqual('King of Hearts');
+    expect(card_AS.name).toEqual('Ace of Spades');
+});
+
+it('should print out the verbose name of cards on demand', () => {
+    var card_2C = new Card('2', 'C');
+    var card_4D = new Card('4', 'D');
+    var card_TD = new Card('T', 'D');
+    var card_KH = new Card('K', 'H');
+    var card_AS = new Card('A', 'S');
+
+    expect(card_2C.name_verbose).toEqual('Two of Clubs');
+    expect(card_4D.name_verbose).toEqual('Four of Diamonds');
+    expect(card_TD.name_verbose).toEqual('Ten of Diamonds');
+    expect(card_KH.name_verbose).toEqual('King of Hearts');
+    expect(card_AS.name_verbose).toEqual('Ace of Spades');
+});
