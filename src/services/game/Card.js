@@ -40,5 +40,9 @@ class Card {
     get value() {
         return this.valid_ranks.indexOf(this.rank) + 1;
     }
+
+    get v() {
+        return this.value;
+    }
 }
 exports.Card = Card;
