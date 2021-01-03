@@ -6,7 +6,7 @@ class Card {
             '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'
         ];
         this.valid_suits = [
-            'C', 'S', 'H', 'D'
+            'H', 'D', 'C', 'S'
         ];
         this.rank = rank.toUpperCase();
         this.suit = suit.toUpperCase();
