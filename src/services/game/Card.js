@@ -10,3 +10,4 @@ class Card {
 
     }
 }
+exports.Card = Card;
