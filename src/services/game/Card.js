@@ -10,6 +10,10 @@ class Card {
         this.validate();
     }
 
+    toString() {
+        return this.id;
+    }
+
     ten_to_t() {
         if (this.rank === '10') {
             this.rank = 'T';
