@@ -5,14 +5,14 @@ import { Card } from './Card';
 
 class Deck {
     constructor() {
-        this.cards = {};
+        this.cards = [];
     }
 
     reset() {
         Definitions.valid_ranks.forEach(rank => {
             Definitions.valid_suits.forEach(suit => {
                 var card = new Card(rank, suit);
-                this.cards[card.id] = card;
+                this.cards.push({id: card.id, card: card});
             });
         });
     }
