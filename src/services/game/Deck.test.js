@@ -6,6 +6,5 @@ var deck = new Deck();
 
 it('should contain all 52 unique cards and no more', () => {
     deck.reset();
-    expect(deck.cards).toBeInstanceOf(Set); //ensures all are unique
-    expect(deck.cards.size).toEqual(52);
+    expect(Object.keys(deck.cards)).toHaveLength(52);
 });
