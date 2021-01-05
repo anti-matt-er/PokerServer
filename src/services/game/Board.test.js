@@ -5,6 +5,29 @@ import { Card } from './Card';
 
 const board = new Board();
 
+it('should only accept arrays of Card instances', () => {
+    expect(() => {
+       board.reset();
+       board.deal('not an array');
+    }).toThrow('must be an array');
+    expect(() => {
+        board.reset();
+        board.deal(123);
+     }).toThrow('must be an array');
+     expect(() => {
+        board.reset();
+        board.deal({});
+     }).toThrow('must be an array');
+    expect(() => {
+        board.reset();
+        board.deal([
+            'not a card',
+            null,
+            new Card('A', 'S')
+        ]);
+    }).toThrow('only contain Card instances');
+});
+
 it('should only accept the right amount of cards on each street', () => {
     const card_4D = new Card('4', 'D');
     const card_TD = new Card('T', 'D');
