@@ -105,6 +105,17 @@ describe('deck', () => {
             process.stdout.write('Difference between min and max distribution deviates ' + deviation_percentage.toFixed(2) + '% from expected average.\n\n');
         });
     });
+
+    describe('deal', () => {
+        const deck = new Deck();
+        deck.shuffle();
+        
+        it('should deal 2 cards and remove them from the deck', () => {
+            let hand = deck.deal();
+            expect(hand).toHaveLength(2);
+            expect(deck.cards).toHaveLength(50);
+        });
+    });
     
 });
 

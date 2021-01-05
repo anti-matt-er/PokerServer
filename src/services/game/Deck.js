@@ -28,5 +28,12 @@ class Deck {
     bad_shuffle() {
         this.cards.sort(() => .5 - Math.random()); // BIASED, FOR TESTING
     }
+
+    deal() {
+        return [
+            this.cards.pop(),
+            this.cards.pop()
+        ];
+    }
 }
 exports.Deck = Deck;
