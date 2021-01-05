@@ -16,7 +16,7 @@ describe('deck', () => {
     
     describe('shuffle', () => {
         var raw_results = [];
-        
+
         it('should be unbiased', () => {
             var shuffle_results = {
                 '1,2,3': {
@@ -64,8 +64,11 @@ describe('deck', () => {
         
             const expected_average = 167; //1000 runs / 6 possible results
             const acceptable_deviation = 20; //just over 10% of above number
-        
-            fail('test not yet implemented');
+
+            raw_results.forEach(result => {
+                var deviation = Math.abs(expected_average - result.value);
+                expect(deviation).toBeLessThan(acceptable_deviation);
+            });
         });
 
         afterAll(() => {
