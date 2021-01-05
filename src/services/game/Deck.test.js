@@ -139,6 +139,18 @@ describe('deck', () => {
             });
         });
 
+        it('should deal community cards correctly', () => {
+            expect(board.cards.flop).toHaveLength(3);
+            expect(board.cards.flop[0]).toBeInstanceOf(Card);
+            expect(board.cards.flop[1]).toBeInstanceOf(Card);
+            expect(board.cards.flop[2]).toBeInstanceOf(Card);
+            expect(board.cards.turn).toHaveLength(1);
+            expect(board.cards.turn[0]).toBeInstanceOf(Card);
+            expect(board.cards.river).toHaveLength(1);
+            expect(board.cards.river[0]).toBeInstanceOf(Card);
+            expect(board.street).toEqual(board.streets.river);
+        });
+
         it('should remove dealt cards from the deck', () => {
             const expected_remaining_cards = 52 - (players.length * 2) - 5;
             //Deck starts at 52, each player has a hand of 2 cards, the board has 5 cards at river
