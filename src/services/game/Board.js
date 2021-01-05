@@ -1,5 +1,7 @@
 'use strict';
 
+import { Card } from './Card';
+
 class Board {
     constructor() {
         this.streets = Object.freeze({
@@ -21,6 +23,14 @@ class Board {
     }
 
     deal(cards) {
+        if (!Array.isArray(cards)) {
+            throw 'Error: `cards` must be an array!';
+        }
+        cards.forEach(card => {
+            if (!(card instanceof Card)) {
+                throw 'Error: `cards` should only contain Card instances!';
+            }
+        });
         switch (this.street) {
             case this.streets.preflop:
                 if (cards.length !== 3) {
