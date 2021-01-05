@@ -2,6 +2,8 @@
 
 import { Deck } from './Deck';
 import { Card } from './Card';
+import { Board } from './Board';
+import { Player } from './Player';
 const wunderbar = require('@gribnoysup/wunderbar');
 
 describe('deck', () => {
@@ -109,22 +111,38 @@ describe('deck', () => {
 
     describe('deal', () => {
         const deck = new Deck();
-        let player = {};
+        let players = [
+            new Player(),
+            new Player(),
+            new Player(),
+            new Player(),
+            new Player()
+        ];
+        let board = new Board();
 
         beforeAll(() => {
             deck.reset();
             deck.shuffle();
-            deck.deal(player);
+            players.forEach(player => {
+                deck.deal(player);
+            }); //PREFLOP
+            deck.deal(board); //FLOP
+            deck.deal(board); //TURN
+            deck.deal(board); //RIVER
         });
         
-        it('should deal 2 cards to a player', () => {
-            expect(player.hand).toHaveLength(2);
-            expect(player.hand[0]).toBeInstanceOf(Card);
-            expect(player.hand[1]).toBeInstanceOf(Card);
+        it('should deal 2 cards to all players', () => {
+            players.forEach(player => {
+                expect(player.hand).toHaveLength(2);
+                expect(player.hand[0]).toBeInstanceOf(Card);
+                expect(player.hand[1]).toBeInstanceOf(Card);
+            });
         });
 
         it('should remove dealt cards from the deck', () => {
-            expect(deck.cards).toHaveLength(50);
+            const expected_remaining_cards = 52 - (players.length * 2) - 5;
+            //Deck starts at 52, each player has a hand of 2 cards, the board has 5 cards at river
+            expect(deck.cards).toHaveLength(expected_remaining_cards);
         });
     });
     
