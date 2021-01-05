@@ -3,13 +3,12 @@
 import { Deck } from './Deck';
 var wunderbar = require('@gribnoysup/wunderbar');
 
-var deck = new Deck();
-
 describe('deck', () => {
 
     describe('general', () => {
+        var deck = new Deck();
+
         it('should contain all 52 cards', () => {
-            deck.reset();
             expect(deck.cards).toHaveLength(52);
         });
         it('should correctly reset deck', () => {
@@ -20,6 +19,8 @@ describe('deck', () => {
     });
     
     describe('shuffle', () => {
+        var deck = new Deck();
+        
         var raw_results = [];
         var largest_distribution = 0;
         var smallest_distribution = 600000;
