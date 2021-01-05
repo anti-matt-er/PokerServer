@@ -108,9 +108,10 @@ describe('deck', () => {
 
     describe('deal', () => {
         const deck = new Deck();
-        deck.shuffle();
         
         it('should deal 2 cards and remove them from the deck', () => {
+            deck.reset();
+            deck.shuffle();
             let hand = deck.deal();
             expect(hand).toHaveLength(2);
             expect(deck.cards).toHaveLength(50);
