@@ -156,6 +156,15 @@ describe('deck', () => {
             //Deck starts at 52, each player has a hand of 2 cards, the board has 5 cards at river
             expect(deck.cards).toHaveLength(expected_remaining_cards);
         });
+
+        it('should reject dealing to anything other than Player or Board', () => {
+            let remaining_cards = deck.cards.length;
+            expect(() => {
+                deck.deal({});
+                deck.deal(deck);
+            }).toThrow('instance of Player or Board');
+            expect(deck.cards).toHaveLength(remaining_cards);
+        });
     });
     
 });
