@@ -12,6 +12,11 @@ describe('deck', () => {
             deck.reset();
             expect(deck.cards).toHaveLength(52);
         });
+        it('should correctly reset deck', () => {
+            deck.cards = ['a dirty deck'];
+            deck.reset();
+            expect(deck.cards).toHaveLength(52);
+        });
     });
     
     describe('shuffle', () => {

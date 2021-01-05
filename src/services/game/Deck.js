@@ -5,10 +5,11 @@ import { Card } from './Card';
 
 class Deck {
     constructor() {
-        this.cards = [];
+        this.reset();
     }
 
     reset() {
+        this.cards = [];
         Definitions.valid_ranks.forEach(rank => {
             Definitions.valid_suits.forEach(suit => {
                 var card = new Card(rank, suit);
