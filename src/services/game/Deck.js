@@ -16,5 +16,9 @@ class Deck {
             });
         });
     }
+
+    bad_shuffle() {
+        this.cards.sort(() => .5 - Math.random()); // BIASED, FOR TESTING
+    }
 }
 exports.Deck = Deck;
