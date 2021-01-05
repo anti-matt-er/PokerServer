@@ -44,13 +44,6 @@ it('should only accept the right amount of cards on each street', () => {
         board.deal([1, 2, 3]); // valid, progresses to flop
         board.deal([1]); // valid, progresses to turn
         board.deal([1]); // valid, progresses to river
-        board.deal([]);
-    }).toThrow('invalid number of cards');
-    expect(() => {
-        board.reset();
-        board.deal([1, 2, 3]); // valid, progresses to flop
-        board.deal([1]); // valid, progresses to turn
-        board.deal([1]); // valid, progresses to river
-        board.deal([1, 2]);
-    }).toThrow('invalid number of cards');
+        board.deal(['anything']);
+    }).toThrow('no more cards');
 });
