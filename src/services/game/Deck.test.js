@@ -16,6 +16,10 @@ describe('deck', () => {
     
     describe('shuffle', () => {
         var raw_results = [];
+        var largest_distribution = 0;
+        var smallest_distribution = 600000;
+        const expected_average = 100000; //600000 runs / 6 possible results
+        const acceptable_deviation = 10000; //10% tolerance
 
         it('should be unbiased', () => {
             var shuffle_results = {
@@ -58,12 +62,15 @@ describe('deck', () => {
                 shuffle_results[key].value += 1;
             }
         
-            Object.values(shuffle_results).forEach(element => {
-                raw_results.push(element);
+            Object.values(shuffle_results).forEach(result => {
+                raw_results.push(result);
+                if (result.value > largest_distribution) {
+                    largest_distribution = result.value;
+                }
+                if (result.value < smallest_distribution) {
+                    smallest_distribution = result.value;
+                }
             });
-        
-            const expected_average = 100000; //600000 runs / 6 possible results
-            const acceptable_deviation = 10000; //10% tolerance
 
             raw_results.forEach(result => {
                 var deviation = Math.abs(expected_average - result.value);
@@ -73,8 +80,12 @@ describe('deck', () => {
 
         afterAll(() => {
             process.stdout.write('\nProbability distribution of 3-card deck shuffle:\n');
-        
-            const { chart, legend } = wunderbar(raw_results, { format: '0,0' });
+
+            const { chart, legend } = wunderbar(raw_results, {
+                min: Math.min(smallest_distribution, expected_average - acceptable_deviation),
+                max: largest_distribution,
+                format: '0,0'
+            });
         
             process.stdout.write(chart + '\n\n');
             process.stdout.write(legend + '\n\n');
