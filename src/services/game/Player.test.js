@@ -43,4 +43,6 @@ it('should accept exactly 2 dealt cards', () => {
     expect(() => {
         player.deal([card_KH, card_AS]);
     }).not.toThrow();
+
+    expect(player.hand).toHaveLength(2);
 });
