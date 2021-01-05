@@ -1,7 +1,5 @@
 'use strict';
 
-import { Definitions } from './Card_Definitions';
-import { Card } from './Card';
 import { Deck } from './Deck';
 var wunderbar = require('@gribnoysup/wunderbar');
 
