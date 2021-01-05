@@ -42,42 +42,42 @@ it('should only accept the right amount of cards on each street', () => {
     // PREFLOP
     expect(() => {
         board.reset();
-        board.deal(two_cards);
+        board.deal(two_cards); //invalid, expects 3 cards
     }).toThrow('invalid number of cards');
     expect(() => {
         board.reset();
-        board.deal(four_cards);
+        board.deal(four_cards); //invalid, expects 3 cards
     }).toThrow('invalid number of cards');
     // FLOP
     expect(() => {
         board.reset();
-        board.deal(three_cards); // valid, progresses to flop
-        board.deal(zero_cards);
+        board.deal(three_cards); //valid, progresses to flop
+        board.deal(zero_cards); //invalid, expects 1 card
     }).toThrow('invalid number of cards');
     expect(() => {
         board.reset();
-        board.deal(three_cards); // valid, progresses to flop
-        board.deal(two_cards);
+        board.deal(three_cards); //valid, progresses to flop
+        board.deal(two_cards); //invalid, expects 1 card
     }).toThrow('invalid number of cards');
     // TURN
     expect(() => {
         board.reset();
-        board.deal(three_cards); // valid, progresses to flop
-        board.deal(one_card); // valid, progresses to turn
-        board.deal(zero_cards);
+        board.deal(three_cards); //valid, progresses to flop
+        board.deal(one_card); //valid, progresses to turn
+        board.deal(zero_cards); //invalid, expects 1 card
     }).toThrow('invalid number of cards');
     expect(() => {
         board.reset();
-        board.deal(three_cards); // valid, progresses to flop
-        board.deal(one_card); // valid, progresses to turn
-        board.deal(two_cards);
+        board.deal(three_cards); //valid, progresses to flop
+        board.deal(one_card); //valid, progresses to turn
+        board.deal(two_cards); //invalid, expects 1 card
     }).toThrow('invalid number of cards');
     // RIVER
     expect(() => {
         board.reset();
-        board.deal(three_cards); // valid, progresses to flop
-        board.deal(one_card); // valid, progresses to turn
-        board.deal(one_card); // valid, progresses to river
-        board.deal(['anything']);
+        board.deal(three_cards); //valid, progresses to flop
+        board.deal(one_card); //valid, progresses to turn
+        board.deal(one_card); //valid, progresses to river
+        board.deal(one_card); //invalid, expects nothing
     }).toThrow('no more cards');
 });
