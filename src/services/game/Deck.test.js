@@ -103,6 +103,8 @@ describe('deck', () => {
         
             process.stdout.write(chart + '\n\n');
             process.stdout.write(legend + '\n\n');
+            var deviation_percentage = ((largest_distribution - smallest_distribution) / expected_average) * 100;
+            process.stdout.write('Difference between min and max distribution deviates ' + deviation_percentage.toFixed(2) + '% from expected average.');
         });
     });
     
