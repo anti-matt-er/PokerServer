@@ -1,6 +1,7 @@
 'use strict';
 
 import { Deck } from './Deck';
+import { Card } from './Card';
 const wunderbar = require('@gribnoysup/wunderbar');
 
 describe('deck', () => {
@@ -108,12 +109,21 @@ describe('deck', () => {
 
     describe('deal', () => {
         const deck = new Deck();
-        
-        it('should deal 2 cards and remove them from the deck', () => {
+        let player = {};
+
+        beforeAll(() => {
             deck.reset();
             deck.shuffle();
-            let hand = deck.deal();
-            expect(hand).toHaveLength(2);
+            deck.deal(player);
+        });
+        
+        it('should deal 2 cards to a player', () => {
+            expect(player.hand).toHaveLength(2);
+            expect(player.hand[0]).toBeInstanceOf(Card);
+            expect(player.hand[1]).toBeInstanceOf(Card);
+        });
+
+        it('should remove dealt cards from the deck', () => {
             expect(deck.cards).toHaveLength(50);
         });
     });

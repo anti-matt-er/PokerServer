@@ -29,10 +29,10 @@ class Deck {
         this.cards.sort(() => .5 - Math.random()); // BIASED, FOR TESTING
     }
 
-    deal() {
-        return [
-            this.cards.pop(),
-            this.cards.pop()
+    deal(player) {
+        player.hand = [
+            this.cards.pop().card,
+            this.cards.pop().card
         ];
     }
 }
