@@ -51,7 +51,7 @@ describe('deck', () => {
                 }
             };
         
-            for (let i = 0; i < 1000; i++) {
+            for (let i = 0; i < 600000; i++) {
                 deck.cards = [1, 2, 3]; //mock a 3-card deck for simulation purposes, this is sufficient to test for bias
                 deck.shuffle();
                 var key = `${deck.cards[0]},${deck.cards[1]},${deck.cards[2]}`;
@@ -62,8 +62,8 @@ describe('deck', () => {
                 raw_results.push(element);
             });
         
-            const expected_average = 167; //1000 runs / 6 possible results
-            const acceptable_deviation = 20; //just over 10% of above number
+            const expected_average = 100000; //600000 runs / 6 possible results
+            const acceptable_deviation = 10000; //10% tolerance
 
             raw_results.forEach(result => {
                 var deviation = Math.abs(expected_average - result.value);
