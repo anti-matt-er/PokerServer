@@ -12,6 +12,9 @@ class Player {
     }
 
     deal(cards) {
+        if (this.hand.length !== 0) {
+            throw 'Error: Player already has a hand!';
+        }
         if (!Array.isArray(cards)) {
             throw 'Error: `cards` must be an array!';
         }
