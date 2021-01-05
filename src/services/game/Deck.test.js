@@ -1,5 +1,7 @@
 'use strict';
 
+import { Definitions } from './Card_Definitions';
+import { Card } from './Card';
 import { Deck } from './Deck';
 var wunderbar = require('@gribnoysup/wunderbar');
 
@@ -9,8 +11,14 @@ describe('deck', () => {
         var deck = new Deck();
 
         it('should contain all 52 cards', () => {
+            expect(deck.cards).toContainEqual(expect.objectContaining({id: '2C'}));
+            expect(deck.cards).toContainEqual(expect.objectContaining({id: '4D'}));
+            expect(deck.cards).toContainEqual(expect.objectContaining({id: 'TD'}));
+            expect(deck.cards).toContainEqual(expect.objectContaining({id: 'KH'}));
+            expect(deck.cards).toContainEqual(expect.objectContaining({id: 'AS'}));
             expect(deck.cards).toHaveLength(52);
         });
+        
         it('should correctly reset deck', () => {
             deck.cards = ['a dirty deck'];
             deck.reset();
@@ -20,7 +28,7 @@ describe('deck', () => {
     
     describe('shuffle', () => {
         var deck = new Deck();
-        
+
         var raw_results = [];
         var largest_distribution = 0;
         var smallest_distribution = 600000;
