@@ -2,6 +2,10 @@
 
 class Player {
     constructor() {
+        this.reset();
+    }
+
+    reset() {
         this.hand = [];
     }
 }
