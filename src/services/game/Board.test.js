@@ -14,6 +14,17 @@ const two_cards = [card_4D, card_TD];
 const three_cards = [card_4D, card_TD, card_KH];
 const four_cards = [card_4D, card_TD, card_KH, card_AS]
 
+it('should reset correctly', () => {
+    board.reset();
+    board.deal(three_cards);
+    board.deal(one_card);
+    board.deal(one_card);
+    board.reset();
+    expect(board.cards.flop).toEqual([]);
+    expect(board.cards.turn).toEqual([]);
+    expect(board.cards.river).toEqual([]);
+});
+
 it('should only accept arrays of Card instances', () => {
     expect(() => {
        board.reset();
