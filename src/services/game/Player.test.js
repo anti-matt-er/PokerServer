@@ -46,3 +46,19 @@ it('should accept exactly 2 dealt cards', () => {
 
     expect(player.hand).toHaveLength(2);
 });
+
+it('should not accept more cards if there\'s already a hand', () => {
+    const player = new Player();
+
+    expect(() => {
+        player.deal([card_KH, card_AS]);
+        player.deal([card_KH, card_AS]);
+    }).toThrow('already has a hand');
+
+    expect(() => {
+        player.reset();
+        player.deal([card_KH, card_AS]);
+        player.reset();
+        player.deal([card_KH, card_AS]);
+    }).not.toThrow();
+});
