@@ -1,12 +1,12 @@
 'use strict';
 
 import { Deck } from './Deck';
-var wunderbar = require('@gribnoysup/wunderbar');
+const wunderbar = require('@gribnoysup/wunderbar');
 
 describe('deck', () => {
 
     describe('general', () => {
-        var deck = new Deck();
+        const deck = new Deck();
 
         it('should contain all 52 cards', () => {
             expect(deck.cards).toContainEqual(expect.objectContaining({id: '2C'}));
@@ -25,16 +25,16 @@ describe('deck', () => {
     });
     
     describe('shuffle', () => {
-        var deck = new Deck();
+        const deck = new Deck();
 
-        var raw_results = [];
-        var largest_distribution = 0;
-        var smallest_distribution = 600000;
+        let raw_results = [];
+        let largest_distribution = 0;
+        let smallest_distribution = 600000;
         const expected_average = 100000; //600000 runs / 6 possible results
         const acceptable_deviation = 10000; //10% tolerance
 
         it('should be unbiased', () => {
-            var shuffle_results = {
+            let shuffle_results = {
                 '1,2,3': {
                     label: '1,2,3:  ',
                     value: 0,
@@ -70,7 +70,7 @@ describe('deck', () => {
             for (let i = 0; i < 600000; i++) {
                 deck.cards = [1, 2, 3]; //mock a 3-card deck for simulation purposes, this is sufficient to test for bias
                 deck.shuffle();
-                var key = `${deck.cards[0]},${deck.cards[1]},${deck.cards[2]}`;
+                const key = `${deck.cards[0]},${deck.cards[1]},${deck.cards[2]}`;
                 shuffle_results[key].value += 1;
             }
         
@@ -85,7 +85,7 @@ describe('deck', () => {
             });
 
             raw_results.forEach(result => {
-                var deviation = Math.abs(expected_average - result.value);
+                let deviation = Math.abs(expected_average - result.value);
                 expect(deviation).toBeLessThan(acceptable_deviation);
             });
         });
@@ -101,7 +101,7 @@ describe('deck', () => {
         
             process.stdout.write(chart + '\n\n');
             process.stdout.write(legend + '\n\n');
-            var deviation_percentage = ((largest_distribution - smallest_distribution) / expected_average) * 100;
+            let deviation_percentage = ((largest_distribution - smallest_distribution) / expected_average) * 100;
             process.stdout.write('Difference between min and max distribution deviates ' + deviation_percentage.toFixed(2) + '% from expected average.');
         });
     });

@@ -12,7 +12,7 @@ class Deck {
         this.cards = [];
         Definitions.valid_ranks.forEach(rank => {
             Definitions.valid_suits.forEach(suit => {
-                var card = new Card(rank, suit);
+                const card = new Card(rank, suit);
                 this.cards.push({id: card.id, card: card});
             });
         });
