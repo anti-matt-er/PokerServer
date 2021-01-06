@@ -92,7 +92,7 @@ const rankings = {
         score: 1
     }
 };
-exports.rankings = rankings;
+exports.Rankings = rankings;
 
 const weights = {
     ranking: 3,
@@ -100,4 +100,4 @@ const weights = {
     hand_small: 1,
     remainder: 0
 };
-exports.weights = weights;
+exports.Weights = weights;
