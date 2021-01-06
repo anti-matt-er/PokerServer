@@ -3,6 +3,28 @@
 import { Judge } from './Judge';
 import { Card } from './Card';
 
+describe('functions', () => {
+    it('should sort cards by ascending value', () => {
+        const cards = [
+            new Card('T', 'C'),
+            new Card('4', 'D'),
+            new Card('9', 'H'),
+            new Card('A', 'S'),
+            new Card('9', 'C'),
+            new Card('3', 'D'),
+            new Card('J', 'H')
+        ];
+        let sorted_cards = Judge.sort(cards);
+        expect(sorted_cards[0].rank).toEqual('3');
+        expect(sorted_cards[1].rank).toEqual('4');
+        expect(sorted_cards[2].rank).toEqual('9');
+        expect(sorted_cards[3].rank).toEqual('9');
+        expect(sorted_cards[4].rank).toEqual('T');
+        expect(sorted_cards[5].rank).toEqual('J');
+        expect(sorted_cards[6].rank).toEqual('A');
+    });
+});
+
 describe('identify hands', () => {
     it('should identify Royal Flush', () => {
         const cards = {
