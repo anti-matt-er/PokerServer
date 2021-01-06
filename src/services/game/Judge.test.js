@@ -6,10 +6,7 @@ import { Card } from './Card';
 describe('identify hands', () => {
     it('should identify Royal Flush', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'S'),
-                new Card('J', 'S')
-            ],
+            player_hand: [new Card('A', 'S'), new Card('J', 'S')],
             board: [
                 new Card('T', 'S'),
                 new Card('Q', 'S'),
@@ -24,10 +21,7 @@ describe('identify hands', () => {
 
     it('should identify Straight Flush', () => {
         const cards = {
-            player_hand: [
-                new Card('5', 'S'),
-                new Card('9', 'S')
-            ],
+            player_hand: [new Card('5', 'S'), new Card('9', 'S')],
             board: [
                 new Card('6', 'S'),
                 new Card('7', 'S'),
@@ -42,10 +36,7 @@ describe('identify hands', () => {
 
     it('should identify Four of a Kind', () => {
         const cards = {
-            player_hand: [
-                new Card('T', 'C'),
-                new Card('T', 'D')
-            ],
+            player_hand: [new Card('T', 'C'), new Card('T', 'D')],
             board: [
                 new Card('T', 'H'),
                 new Card('T', 'S'),
@@ -60,10 +51,7 @@ describe('identify hands', () => {
 
     it('should identify Full House', () => {
         const cards = {
-            player_hand: [
-                new Card('K', 'C'),
-                new Card('K', 'D')
-            ],
+            player_hand: [new Card('K', 'C'), new Card('K', 'D')],
             board: [
                 new Card('A', 'C'),
                 new Card('A', 'D'),
@@ -78,10 +66,7 @@ describe('identify hands', () => {
 
     it('should identify Flush', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'S'),
-                new Card('2', 'S')
-            ],
+            player_hand: [new Card('A', 'S'), new Card('2', 'S')],
             board: [
                 new Card('4', 'S'),
                 new Card('6', 'S'),
@@ -96,10 +81,7 @@ describe('identify hands', () => {
 
     it('should identify Straight', () => {
         const cards = {
-            player_hand: [
-                new Card('5', 'C'),
-                new Card('6', 'D')
-            ],
+            player_hand: [new Card('5', 'C'), new Card('6', 'D')],
             board: [
                 new Card('7', 'H'),
                 new Card('8', 'S'),
@@ -114,10 +96,7 @@ describe('identify hands', () => {
 
     it('should identify Three of a Kind', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'C'),
-                new Card('A', 'D')
-            ],
+            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
             board: [
                 new Card('A', 'H'),
                 new Card('2', 'C'),
@@ -132,10 +111,7 @@ describe('identify hands', () => {
 
     it('should identify Two Pair', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'C'),
-                new Card('A', 'D')
-            ],
+            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
             board: [
                 new Card('K', 'C'),
                 new Card('K', 'D'),
@@ -150,10 +126,7 @@ describe('identify hands', () => {
 
     it('should identify Pair', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'C'),
-                new Card('A', 'D')
-            ],
+            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
             board: [
                 new Card('2', 'H'),
                 new Card('4', 'S'),
@@ -168,10 +141,7 @@ describe('identify hands', () => {
 
     it('should identify High Card', () => {
         const cards = {
-            player_hand: [
-                new Card('A', 'C'),
-                new Card('J', 'D')
-            ],
+            player_hand: [new Card('A', 'C'), new Card('J', 'D')],
             board: [
                 new Card('2', 'H'),
                 new Card('4', 'S'),
