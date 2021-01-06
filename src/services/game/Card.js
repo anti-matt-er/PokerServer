@@ -27,13 +27,21 @@ class Card {
 
     checkRank() {
         if (!Definitions.valid_ranks.includes(this.rank)) {
-            throw 'Error constructing card: "' + this.rank + '" is not a valid rank!'
+            throw (
+                'Error constructing card: "' +
+                this.rank +
+                '" is not a valid rank!'
+            );
         }
     }
 
     checkSuit() {
         if (!Definitions.valid_suits.includes(this.suit)) {
-            throw 'Error constructing card: "' + this.suit + '" is not a valid suit!'
+            throw (
+                'Error constructing card: "' +
+                this.suit +
+                '" is not a valid suit!'
+            );
         }
     }
 
@@ -50,11 +58,19 @@ class Card {
     }
 
     get name() {
-        return Definitions.ranks[this.rank].name + ' of ' + Definitions.suits[this.suit].name;
+        return (
+            Definitions.ranks[this.rank].name +
+            ' of ' +
+            Definitions.suits[this.suit].name
+        );
     }
 
     get name_verbose() {
-        return Definitions.ranks[this.rank].name_long + ' of ' + Definitions.suits[this.suit].name;
+        return (
+            Definitions.ranks[this.rank].name_long +
+            ' of ' +
+            Definitions.suits[this.suit].name
+        );
     }
 }
 exports.Card = Card;

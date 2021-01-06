@@ -12,10 +12,10 @@ class Deck {
 
     reset() {
         this.cards = [];
-        Definitions.valid_ranks.forEach(rank => {
-            Definitions.valid_suits.forEach(suit => {
+        Definitions.valid_ranks.forEach((rank) => {
+            Definitions.valid_suits.forEach((suit) => {
                 const card = new Card(rank, suit);
-                this.cards.push({id: card.id, card: card});
+                this.cards.push({ id: card.id, card: card });
             });
         });
     }
@@ -28,7 +28,7 @@ class Deck {
     }
 
     bad_shuffle() {
-        this.cards.sort(() => .5 - Math.random()); // BIASED, FOR TESTING
+        this.cards.sort(() => 0.5 - Math.random()); // BIASED, FOR TESTING
     }
 
     deal_cards(count) {
@@ -42,8 +42,7 @@ class Deck {
     deal(to) {
         if (to instanceof Player) {
             to.hand = this.deal_cards(2);
-        }
-        else if (to instanceof Board) {
+        } else if (to instanceof Board) {
             switch (to.street) {
                 case to.streets.preflop:
                     to.deal(this.deal_cards(3));
@@ -55,8 +54,7 @@ class Deck {
                     to.deal(this.deal_cards(1));
                     break;
             }
-        }
-        else {
+        } else {
             throw 'Error: Provided object is not instance of Player or Board!';
         }
     }

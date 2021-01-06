@@ -12,7 +12,7 @@ const zero_cards = [];
 const one_card = [card_4D];
 const two_cards = [card_4D, card_TD];
 const three_cards = [card_4D, card_TD, card_KH];
-const four_cards = [card_4D, card_TD, card_KH, card_AS]
+const four_cards = [card_4D, card_TD, card_KH, card_AS];
 
 it('should reset correctly', () => {
     board.reset();
@@ -27,24 +27,20 @@ it('should reset correctly', () => {
 
 it('should only accept arrays of Card instances', () => {
     expect(() => {
-       board.reset();
-       board.deal('not an array');
+        board.reset();
+        board.deal('not an array');
     }).toThrow('must be an array');
     expect(() => {
         board.reset();
         board.deal(123);
-     }).toThrow('must be an array');
-     expect(() => {
-        board.reset();
-        board.deal({});
-     }).toThrow('must be an array');
+    }).toThrow('must be an array');
     expect(() => {
         board.reset();
-        board.deal([
-            'not a card',
-            null,
-            new Card('A', 'S')
-        ]);
+        board.deal({});
+    }).toThrow('must be an array');
+    expect(() => {
+        board.reset();
+        board.deal(['not a card', null, new Card('A', 'S')]);
     }).toThrow('only contain Card instances');
 });
 

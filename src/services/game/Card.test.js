@@ -53,13 +53,13 @@ it('should allow .v as an allias of .value', () => {
 });
 
 it('should allow lowercase and convert', () => {
-    let card_2C
-    let card_2S
-    let card_2H
-    let card_2D
-    let card_AS
-    let card_TS
-    
+    let card_2C;
+    let card_2S;
+    let card_2H;
+    let card_2D;
+    let card_AS;
+    let card_TS;
+
     expect(() => {
         card_2C = new Card('2', 'c');
         card_2S = new Card('2', 's');
