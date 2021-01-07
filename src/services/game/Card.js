@@ -1,13 +1,34 @@
 'use strict';
 
+import { string } from 'joi';
 import { Definitions } from './Card_Definitions';
 
 class Card {
-    constructor(rank, suit) {
+    constructor() {
+        if (arguments.length === 2) {
+            this.construct(arguments[0], arguments[1]);
+        }
+        if (arguments.length === 1) {
+            this.construct_short(arguments[0]);
+        }
+    }
+
+    construct(rank, suit) {
         this.rank = rank.toUpperCase();
         this.suit = suit.toUpperCase();
         this.ten_to_t();
         this.validate();
+    }
+
+    construct_short(id) {
+        if (typeof id !== 'string') {
+            throw 'Error: id must be a string!';
+        }
+        id = id.replace('10', 'T');
+        if (id.length !== 2) {
+            throw 'Error: id must consist of 2 characters!';
+        }
+        this.construct(id[0], id[1]);
     }
 
     toString() {
