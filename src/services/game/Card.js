@@ -65,6 +65,18 @@ class Card {
         }
     }
 
+    static set(ids) {
+        if (!Array.isArray(ids)) {
+            throw 'Error: `ids` must be an array!';
+        }
+
+        let cards = [];
+        for (let id of ids) {
+            cards.push(new Card(id));
+        }
+        return cards;
+    }
+
     get value() {
         return Definitions.ranks[this.rank].value;
     }
