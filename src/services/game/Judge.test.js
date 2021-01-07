@@ -6,13 +6,13 @@ import { Card } from './Card';
 describe('functions', () => {
     it('should sort cards by ascending value', () => {
         const cards = [
-            new Card('T', 'C'),
-            new Card('4', 'D'),
-            new Card('9', 'H'),
-            new Card('A', 'S'),
-            new Card('9', 'C'),
-            new Card('3', 'D'),
-            new Card('J', 'H')
+            new Card('TC'),
+            new Card('4D'),
+            new Card('9H'),
+            new Card('AS'),
+            new Card('9C'),
+            new Card('3D'),
+            new Card('JH')
         ];
         let sorted_cards = Judge.sort(cards);
         expect(sorted_cards[0].rank).toEqual('3');
@@ -28,13 +28,13 @@ describe('functions', () => {
 describe('identify hands', () => {
     it('should identify Royal Flush', () => {
         const cards = {
-            player_hand: [new Card('A', 'S'), new Card('J', 'S')],
+            player_hand: [new Card('AS'), new Card('JS')],
             board: [
-                new Card('T', 'S'),
-                new Card('Q', 'S'),
-                new Card('K', 'S'),
-                new Card('2', 'C'),
-                new Card('2', 'D')
+                new Card('TS'),
+                new Card('QS'),
+                new Card('KS'),
+                new Card('2C'),
+                new Card('2D')
             ]
         };
         let hand = Judge.assess(cards);
@@ -43,13 +43,13 @@ describe('identify hands', () => {
 
     it('should identify Straight Flush', () => {
         const cards = {
-            player_hand: [new Card('5', 'S'), new Card('9', 'S')],
+            player_hand: [new Card('5S'), new Card('9S')],
             board: [
-                new Card('6', 'S'),
-                new Card('7', 'S'),
-                new Card('8', 'S'),
-                new Card('2', 'C'),
-                new Card('2', 'D')
+                new Card('6S'),
+                new Card('7S'),
+                new Card('8S'),
+                new Card('2C'),
+                new Card('2D')
             ]
         };
         let hand = Judge.assess(cards);
@@ -58,13 +58,13 @@ describe('identify hands', () => {
 
     it('should identify Four of a Kind', () => {
         const cards = {
-            player_hand: [new Card('T', 'C'), new Card('T', 'D')],
+            player_hand: [new Card('TC'), new Card('TD')],
             board: [
-                new Card('T', 'H'),
-                new Card('T', 'S'),
-                new Card('2', 'C'),
-                new Card('2', 'D'),
-                new Card('2', 'H')
+                new Card('TH'),
+                new Card('TS'),
+                new Card('2C'),
+                new Card('2D'),
+                new Card('2H')
             ]
         };
         let hand = Judge.assess(cards);
@@ -73,13 +73,13 @@ describe('identify hands', () => {
 
     it('should identify Full House', () => {
         const cards = {
-            player_hand: [new Card('K', 'C'), new Card('K', 'D')],
+            player_hand: [new Card('KC'), new Card('KD')],
             board: [
-                new Card('A', 'C'),
-                new Card('A', 'D'),
-                new Card('A', 'H'),
-                new Card('2', 'C'),
-                new Card('3', 'C')
+                new Card('AC'),
+                new Card('AD'),
+                new Card('AH'),
+                new Card('2C'),
+                new Card('3C')
             ]
         };
         let hand = Judge.assess(cards);
@@ -88,13 +88,13 @@ describe('identify hands', () => {
 
     it('should identify Flush', () => {
         const cards = {
-            player_hand: [new Card('A', 'S'), new Card('2', 'S')],
+            player_hand: [new Card('AS'), new Card('2S')],
             board: [
-                new Card('4', 'S'),
-                new Card('6', 'S'),
-                new Card('8', 'S'),
-                new Card('T', 'C'),
-                new Card('2', 'D')
+                new Card('4S'),
+                new Card('6S'),
+                new Card('8S'),
+                new Card('TC'),
+                new Card('2D')
             ]
         };
         let hand = Judge.assess(cards);
@@ -103,13 +103,13 @@ describe('identify hands', () => {
 
     it('should identify Straight', () => {
         const cards = {
-            player_hand: [new Card('5', 'C'), new Card('6', 'D')],
+            player_hand: [new Card('5C'), new Card('6D')],
             board: [
-                new Card('7', 'H'),
-                new Card('8', 'S'),
-                new Card('9', 'C'),
-                new Card('2', 'C'),
-                new Card('2', 'D')
+                new Card('7H'),
+                new Card('8S'),
+                new Card('9C'),
+                new Card('2C'),
+                new Card('2D')
             ]
         };
         let hand = Judge.assess(cards);
@@ -118,13 +118,13 @@ describe('identify hands', () => {
 
     it('should identify ace-low Straight', () => {
         const cards = {
-            player_hand: [new Card('5', 'C'), new Card('A', 'D')],
+            player_hand: [new Card('5C'), new Card('AD')],
             board: [
-                new Card('2', 'H'),
-                new Card('3', 'S'),
-                new Card('4', 'C'),
-                new Card('T', 'C'),
-                new Card('T', 'D')
+                new Card('2H'),
+                new Card('3S'),
+                new Card('4C'),
+                new Card('TC'),
+                new Card('TD')
             ]
         };
         let hand = Judge.assess(cards);
@@ -133,13 +133,13 @@ describe('identify hands', () => {
 
     it('should identify Three of a Kind', () => {
         const cards = {
-            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
+            player_hand: [new Card('AC'), new Card('AD')],
             board: [
-                new Card('A', 'H'),
-                new Card('2', 'C'),
-                new Card('4', 'D'),
-                new Card('6', 'H'),
-                new Card('8', 'S')
+                new Card('AH'),
+                new Card('2C'),
+                new Card('4D'),
+                new Card('6H'),
+                new Card('8S')
             ]
         };
         let hand = Judge.assess(cards);
@@ -148,13 +148,13 @@ describe('identify hands', () => {
 
     it('should identify Two Pair', () => {
         const cards = {
-            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
+            player_hand: [new Card('AC'), new Card('AD')],
             board: [
-                new Card('K', 'C'),
-                new Card('K', 'D'),
-                new Card('2', 'C'),
-                new Card('4', 'D'),
-                new Card('6', 'H')
+                new Card('KC'),
+                new Card('KD'),
+                new Card('2C'),
+                new Card('4D'),
+                new Card('6H')
             ]
         };
         let hand = Judge.assess(cards);
@@ -163,13 +163,13 @@ describe('identify hands', () => {
 
     it('should identify Pair', () => {
         const cards = {
-            player_hand: [new Card('A', 'C'), new Card('A', 'D')],
+            player_hand: [new Card('AC'), new Card('AD')],
             board: [
-                new Card('2', 'H'),
-                new Card('4', 'S'),
-                new Card('6', 'C'),
-                new Card('8', 'D'),
-                new Card('T', 'H')
+                new Card('2H'),
+                new Card('4S'),
+                new Card('6C'),
+                new Card('8D'),
+                new Card('TH')
             ]
         };
         let hand = Judge.assess(cards);
@@ -178,13 +178,13 @@ describe('identify hands', () => {
 
     it('should identify High Card', () => {
         const cards = {
-            player_hand: [new Card('A', 'C'), new Card('J', 'D')],
+            player_hand: [new Card('AC'), new Card('JD')],
             board: [
-                new Card('2', 'H'),
-                new Card('4', 'S'),
-                new Card('6', 'C'),
-                new Card('8', 'D'),
-                new Card('T', 'H')
+                new Card('2H'),
+                new Card('4S'),
+                new Card('6C'),
+                new Card('8D'),
+                new Card('TH')
             ]
         };
         let hand = Judge.assess(cards);

@@ -3,9 +3,9 @@
 import { Player } from './Player';
 import { Card } from './Card';
 
-const card_KH = new Card('K', 'H');
-const card_AS = new Card('A', 'S');
-const card_TD = new Card('T', 'D');
+const card_KH = new Card('KH');
+const card_AS = new Card('AS');
+const card_TD = new Card('TD');
 
 it('should reset correctly', () => {
     const player = new Player();

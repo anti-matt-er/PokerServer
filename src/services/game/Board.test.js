@@ -4,10 +4,10 @@ import { Board } from './Board';
 import { Card } from './Card';
 
 const board = new Board();
-const card_4D = new Card('4', 'D');
-const card_TD = new Card('T', 'D');
-const card_KH = new Card('K', 'H');
-const card_AS = new Card('A', 'S');
+const card_4D = new Card('4D');
+const card_TD = new Card('TD');
+const card_KH = new Card('KH');
+const card_AS = new Card('AS');
 const zero_cards = [];
 const one_card = [card_4D];
 const two_cards = [card_4D, card_TD];
@@ -40,7 +40,7 @@ it('should only accept arrays of Card instances', () => {
     }).toThrow('must be an array');
     expect(() => {
         board.reset();
-        board.deal(['not a card', null, new Card('A', 'S')]);
+        board.deal(['not a card', null, card_AS]);
     }).toThrow('only contain Card instances');
 });
 
