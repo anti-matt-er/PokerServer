@@ -5,15 +5,9 @@ import { Card } from './Card';
 
 describe('functions', () => {
     it('should sort cards by ascending value', () => {
-        const cards = [
-            new Card('TC'),
-            new Card('4D'),
-            new Card('9H'),
-            new Card('AS'),
-            new Card('9C'),
-            new Card('3D'),
-            new Card('JH')
-        ];
+        const cards = Card.set([
+            'TC', '4D', '9H', 'AS', '9C', '3D', 'JH'
+        ]);
         let sorted_cards = Judge.sort(cards);
         expect(sorted_cards[0].rank).toEqual('3');
         expect(sorted_cards[1].rank).toEqual('4');
@@ -28,14 +22,10 @@ describe('functions', () => {
 describe('identify hands', () => {
     it('should identify Royal Flush', () => {
         const cards = {
-            player_hand: [new Card('AS'), new Card('JS')],
-            board: [
-                new Card('TS'),
-                new Card('QS'),
-                new Card('KS'),
-                new Card('2C'),
-                new Card('2D')
-            ]
+            player_hand: Card.set(['AS', 'JS']),
+            board: Card.set([
+                'TS','QS','KS','2C','2D'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('RF');
@@ -43,14 +33,10 @@ describe('identify hands', () => {
 
     it('should identify Straight Flush', () => {
         const cards = {
-            player_hand: [new Card('5S'), new Card('9S')],
-            board: [
-                new Card('6S'),
-                new Card('7S'),
-                new Card('8S'),
-                new Card('2C'),
-                new Card('2D')
-            ]
+            player_hand: Card.set(['5S', '9S']),
+            board: Card.set([
+                '6S', '7S', '8S', '2C', '2D'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('SF');
@@ -58,14 +44,10 @@ describe('identify hands', () => {
 
     it('should identify Four of a Kind', () => {
         const cards = {
-            player_hand: [new Card('TC'), new Card('TD')],
-            board: [
-                new Card('TH'),
-                new Card('TS'),
-                new Card('2C'),
-                new Card('2D'),
-                new Card('2H')
-            ]
+            player_hand: Card.set(['TC', 'TD']),
+            board: Card.set([
+                'TH', 'TS', '2C', '2D', '2H'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('4K');
@@ -73,14 +55,10 @@ describe('identify hands', () => {
 
     it('should identify Full House', () => {
         const cards = {
-            player_hand: [new Card('KC'), new Card('KD')],
-            board: [
-                new Card('AC'),
-                new Card('AD'),
-                new Card('AH'),
-                new Card('2C'),
-                new Card('3C')
-            ]
+            player_hand: Card.set(['KC', 'KD']),
+            board: Card.set([
+                'AC', 'AD', 'AH', '2C', '3C'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('FH');
@@ -88,14 +66,10 @@ describe('identify hands', () => {
 
     it('should identify Flush', () => {
         const cards = {
-            player_hand: [new Card('AS'), new Card('2S')],
-            board: [
-                new Card('4S'),
-                new Card('6S'),
-                new Card('8S'),
-                new Card('TC'),
-                new Card('2D')
-            ]
+            player_hand: Card.set(['AS', '2S']),
+            board: Card.set([
+                '4S', '6S', '8S', 'TC', '2D'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('FL');
@@ -103,14 +77,10 @@ describe('identify hands', () => {
 
     it('should identify Straight', () => {
         const cards = {
-            player_hand: [new Card('5C'), new Card('6D')],
-            board: [
-                new Card('7H'),
-                new Card('8S'),
-                new Card('9C'),
-                new Card('2C'),
-                new Card('2D')
-            ]
+            player_hand: Card.set(['5C', '6D']),
+            board: Card.set([
+                '7H', '8S', '9C', '2C', '2D'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('ST');
@@ -118,14 +88,10 @@ describe('identify hands', () => {
 
     it('should identify ace-low Straight', () => {
         const cards = {
-            player_hand: [new Card('5C'), new Card('AD')],
-            board: [
-                new Card('2H'),
-                new Card('3S'),
-                new Card('4C'),
-                new Card('TC'),
-                new Card('TD')
-            ]
+            player_hand: Card.set(['5C', 'AD']),
+            board: Card.set([
+                '2H', '3S', '4C', 'TC', 'TD'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('ST');
@@ -133,14 +99,10 @@ describe('identify hands', () => {
 
     it('should identify Three of a Kind', () => {
         const cards = {
-            player_hand: [new Card('AC'), new Card('AD')],
-            board: [
-                new Card('AH'),
-                new Card('2C'),
-                new Card('4D'),
-                new Card('6H'),
-                new Card('8S')
-            ]
+            player_hand: Card.set(['AC', 'AD']),
+            board: Card.set([
+                'AH', '2C', '4D', '6H', '8S'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('3K');
@@ -148,14 +110,10 @@ describe('identify hands', () => {
 
     it('should identify Two Pair', () => {
         const cards = {
-            player_hand: [new Card('AC'), new Card('AD')],
-            board: [
-                new Card('KC'),
-                new Card('KD'),
-                new Card('2C'),
-                new Card('4D'),
-                new Card('6H')
-            ]
+            player_hand: Card.set(['AC', 'AD']),
+            board: Card.set([
+                'KC', 'KD', '2C', '4D', '6H'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('2P');
@@ -163,14 +121,10 @@ describe('identify hands', () => {
 
     it('should identify Pair', () => {
         const cards = {
-            player_hand: [new Card('AC'), new Card('AD')],
-            board: [
-                new Card('2H'),
-                new Card('4S'),
-                new Card('6C'),
-                new Card('8D'),
-                new Card('TH')
-            ]
+            player_hand: Card.set(['AC', 'AD']),
+            board: Card.set([
+                '2H', '4S', '6C', '8D', 'TH'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('PA');
@@ -178,14 +132,10 @@ describe('identify hands', () => {
 
     it('should identify High Card', () => {
         const cards = {
-            player_hand: [new Card('AC'), new Card('JD')],
-            board: [
-                new Card('2H'),
-                new Card('4S'),
-                new Card('6C'),
-                new Card('8D'),
-                new Card('TH')
-            ]
+            player_hand: Card.set(['AC', 'JD']),
+            board: Card.set([
+                '2H', '4S', '6C', '8D', 'TH'
+            ])
         };
         let hand = Judge.assess(cards);
         expect(hand.ranking).toEqual('HC');
