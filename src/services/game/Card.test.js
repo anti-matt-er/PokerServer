@@ -155,7 +155,7 @@ it('should print out the verbose name of cards on demand', () => {
     expect(card_AS.name_verbose).toEqual('Ace of Spades');
 });
 
-it.only('should allow quick creation of card sets', () => {
+it('should allow quick creation of card sets', () => {
     let cards;
 
     expect(() => {
