@@ -5,8 +5,8 @@ const rankings = {
         name: 'Royal Flush',
         flush: true,
         straight: true,
-        min_rank: 10,
-        matches: null,
+        min_rank: 'T',
+        matches: false,
         min_cards: 5,
         score: 10
     },
@@ -14,8 +14,8 @@ const rankings = {
         name: 'Straight Flush',
         flush: true,
         straight: true,
-        min_rank: null,
-        matches: null,
+        min_rank: false,
+        matches: false,
         min_cards: 5,
         score: 9
     },
@@ -23,7 +23,7 @@ const rankings = {
         name: 'Four of a Kind',
         flush: false,
         straight: false,
-        min_rank: null,
+        min_rank: false,
         matches: [4, 0],
         min_cards: 4,
         score: 8
@@ -32,7 +32,7 @@ const rankings = {
         name: 'Full House',
         flush: false,
         straight: false,
-        min_rank: null,
+        min_rank: false,
         matches: [3, 2],
         min_cards: 5,
         score: 7
@@ -41,8 +41,8 @@ const rankings = {
         name: 'Flush',
         flush: true,
         straight: false,
-        min_rank: null,
-        matches: null,
+        min_rank: false,
+        matches: false,
         min_cards: 5,
         score: 6
     },
@@ -50,8 +50,8 @@ const rankings = {
         name: 'Straight',
         flush: false,
         straight: true,
-        min_rank: null,
-        matches: null,
+        min_rank: false,
+        matches: false,
         min_cards: 5,
         score: 5
     },
@@ -59,7 +59,7 @@ const rankings = {
         name: 'Three of a Kind',
         flush: false,
         straight: false,
-        min_rank: null,
+        min_rank: false,
         matches: [3, 0],
         min_cards: 3,
         score: 4
@@ -68,7 +68,7 @@ const rankings = {
         name: 'Two Pair',
         flush: false,
         straight: false,
-        min_rank: null,
+        min_rank: false,
         matches: [2, 2],
         min_cards: 4,
         score: 3
@@ -77,7 +77,7 @@ const rankings = {
         name: 'Pair',
         flush: false,
         straight: false,
-        min_rank: null,
+        min_rank: false,
         matches: [2, 0],
         min_cards: 2,
         score: 2
@@ -86,8 +86,8 @@ const rankings = {
         name: 'High Card',
         flush: false,
         straight: false,
-        min_rank: null,
-        matches: null,
+        min_rank: false,
+        matches: false,
         min_cards: 0,
         score: 1
     }
