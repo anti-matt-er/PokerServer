@@ -154,3 +154,33 @@ it('should print out the verbose name of cards on demand', () => {
     expect(card_KH.name_verbose).toEqual('King of Hearts');
     expect(card_AS.name_verbose).toEqual('Ace of Spades');
 });
+
+it.only('should allow quick creation of card sets', () => {
+    let cards;
+
+    expect(() => {
+        Card.set('not an array');
+    }).toThrow('must be an array');
+
+    expect(() => {
+        Card.set(123);
+    }).toThrow('must be an array');
+
+    expect(() => {
+        Card.set({});
+    }).toThrow('must be an array');
+
+    expect(() => {
+        cards = Card.set([
+            '2C', '4D', 'TD', 'KH', 'AS'
+        ]);
+    }).not.toThrow();
+
+    expect(cards).toEqual([
+        new Card('2C'),
+        new Card('4D'),
+        new Card('TD'),
+        new Card('KH'),
+        new Card('AS')
+    ]);
+});
