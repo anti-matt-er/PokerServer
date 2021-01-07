@@ -22,6 +22,41 @@ it('should allow only valid ranks', () => {
     }).not.toThrow();
 });
 
+it('should allow shorthand construction', () => {
+    let card_AS;
+    let card_TD;
+
+    expect(() => {
+        card_AS = new Card('AS');
+        card_TD = new Card('10D');
+    }).not.toThrow();
+
+    expect(card_AS.rank).toEqual('A');
+    expect(card_AS.suit).toEqual('S');
+    expect(card_TD.rank).toEqual('T');
+    expect(card_TD.suit).toEqual('D');
+
+    expect(() => {
+        new Card(['not', 'a', 'string']);
+    }).toThrow('must be a string');
+
+    expect(() => {
+        new Card(123);
+    }).toThrow('must be a string');
+
+    expect(() => {
+        new Card({});
+    }).toThrow('must be a string');
+
+    expect(() => {
+        new Card('too many chars');
+    }).toThrow('2 characters');
+
+    expect(() => {
+        new Card('a');
+    }).toThrow('2 characters');
+});
+
 it('should allow "10" as a valid rank, converting to "T"', () => {
     let card_TD;
 
@@ -33,11 +68,11 @@ it('should allow "10" as a valid rank, converting to "T"', () => {
 });
 
 it('should return correct values for cards', () => {
-    const card_2C = new Card('2', 'C');
-    const card_4D = new Card('4', 'D');
-    const card_TD = new Card('T', 'D');
-    const card_KH = new Card('K', 'H');
-    const card_AS = new Card('A', 'S');
+    const card_2C = new Card('2C');
+    const card_4D = new Card('4D');
+    const card_TD = new Card('TD');
+    const card_KH = new Card('KH');
+    const card_AS = new Card('AS');
 
     expect(card_2C.value).toEqual(1);
     expect(card_4D.value).toEqual(3);
@@ -47,7 +82,7 @@ it('should return correct values for cards', () => {
 });
 
 it('should allow .v as an allias of .value', () => {
-    const card = new Card('A', 'S');
+    const card = new Card('AS');
     expect(card.v).toBeDefined();
     expect(card.v).toEqual(card.value);
 });
@@ -61,12 +96,12 @@ it('should allow lowercase and convert', () => {
     let card_TS;
 
     expect(() => {
-        card_2C = new Card('2', 'c');
-        card_2S = new Card('2', 's');
-        card_2H = new Card('2', 'h');
-        card_2D = new Card('2', 'd');
-        card_AS = new Card('a', 'S');
-        card_TS = new Card('t', 'S');
+        card_2C = new Card('2c');
+        card_2S = new Card('2s');
+        card_2H = new Card('2h');
+        card_2D = new Card('2d');
+        card_AS = new Card('aS');
+        card_TS = new Card('tS');
     }).not.toThrow();
 
     expect(card_2C.suit).toEqual('C');
@@ -79,10 +114,10 @@ it('should allow lowercase and convert', () => {
 });
 
 it('should print out the id of cards on demand', () => {
-    const card_2C = new Card('2', 'C');
-    const card_4D = new Card('4', 'D');
-    const card_TD = new Card('T', 'D');
-    const card_KH = new Card('K', 'H');
+    const card_2C = new Card('2C');
+    const card_4D = new Card('4D');
+    const card_TD = new Card('TD');
+    const card_KH = new Card('KH');
     const card_AS = new Card('A', 'S');
 
     expect(card_2C.id).toEqual('2C');
@@ -93,11 +128,11 @@ it('should print out the id of cards on demand', () => {
 });
 
 it('should print out the full name of cards on demand', () => {
-    const card_2C = new Card('2', 'C');
-    const card_4D = new Card('4', 'D');
-    const card_TD = new Card('T', 'D');
-    const card_KH = new Card('K', 'H');
-    const card_AS = new Card('A', 'S');
+    const card_2C = new Card('2C');
+    const card_4D = new Card('4D');
+    const card_TD = new Card('TD');
+    const card_KH = new Card('KH');
+    const card_AS = new Card('AS');
 
     expect(card_2C.name).toEqual('2 of Clubs');
     expect(card_4D.name).toEqual('4 of Diamonds');
@@ -107,11 +142,11 @@ it('should print out the full name of cards on demand', () => {
 });
 
 it('should print out the verbose name of cards on demand', () => {
-    const card_2C = new Card('2', 'C');
-    const card_4D = new Card('4', 'D');
-    const card_TD = new Card('T', 'D');
-    const card_KH = new Card('K', 'H');
-    const card_AS = new Card('A', 'S');
+    const card_2C = new Card('2C');
+    const card_4D = new Card('4D');
+    const card_TD = new Card('TD');
+    const card_KH = new Card('KH');
+    const card_AS = new Card('AS');
 
     expect(card_2C.name_verbose).toEqual('Two of Clubs');
     expect(card_4D.name_verbose).toEqual('Four of Diamonds');
