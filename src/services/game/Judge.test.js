@@ -116,6 +116,21 @@ describe('identify hands', () => {
         expect(hand.ranking).toEqual('ST');
     });
 
+    it('should identify ace-low Straight', () => {
+        const cards = {
+            player_hand: [new Card('5', 'C'), new Card('A', 'D')],
+            board: [
+                new Card('2', 'H'),
+                new Card('3', 'S'),
+                new Card('4', 'C'),
+                new Card('T', 'C'),
+                new Card('T', 'D')
+            ]
+        };
+        let hand = Judge.assess(cards);
+        expect(hand.ranking).toEqual('ST');
+    });
+
     it('should identify Three of a Kind', () => {
         const cards = {
             player_hand: [new Card('A', 'C'), new Card('A', 'D')],
