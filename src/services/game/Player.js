@@ -1,9 +1,13 @@
 'use strict';
 
 import { Card } from './Card';
+import { Game } from './Game';
 
 class Player {
-    constructor() {
+    constructor(game) {
+        if (!(game instanceof Game)) {
+            throw 'Error: A Game object must be provided';
+        }
         this.reset();
     }
 
