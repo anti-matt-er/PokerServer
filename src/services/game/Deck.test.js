@@ -4,6 +4,7 @@ import { Deck } from './Deck';
 import { Card } from './Card';
 import { Board } from './Board';
 import { Player } from './Player';
+import { Game } from './Game';
 const wunderbar = require('@gribnoysup/wunderbar');
 
 describe('deck', () => {
@@ -131,13 +132,14 @@ describe('deck', () => {
     });
 
     describe('deal', () => {
+        const game = new Game();
         const deck = new Deck();
         let players = [
-            new Player(),
-            new Player(),
-            new Player(),
-            new Player(),
-            new Player()
+            new Player(game),
+            new Player(game),
+            new Player(game),
+            new Player(game),
+            new Player(game)
         ];
         let board = new Board();
 
