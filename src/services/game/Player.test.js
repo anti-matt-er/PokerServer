@@ -89,6 +89,9 @@ describe('game', () => {
 
 describe('state', () => {
     const game = new Game();
+    game.ante = 5;
+    game.small_blind = 10;
+    game.big_blind = 20;
     
     it('should initialise with `Seating` state', () => {
         const player = new Player(game);
