@@ -6,12 +6,12 @@ const StateMachine = require('javascript-state-machine');
 
 class Player extends StateMachine {
     constructor(game) {
-        super({
-            init: 'Seating'
-        });
         if (!(game instanceof Game)) {
             throw 'Error: A Game object must be provided';
         }
+        super({
+            init: 'Seating'
+        });
         this.reset();
     }
 
