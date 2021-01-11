@@ -105,17 +105,20 @@ describe('state', () => {
     });
 
     it('should remain at `Idle` state if player has enough chips for Ante/Blind', () => {
-        let player = new Player(game);
+        const player = new Player(game);
+        game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_ante();
         expect(player.is('Idle')).toBe(true);
-        player = new Player(game);
+        player.reset();
+        game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_small_blind();
         expect(player.is('Idle')).toBe(true);
-        player = new Player(game);
+        player.reset();
+        game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_big_blind();
@@ -123,17 +126,20 @@ describe('state', () => {
     });
 
     it('should transition to `All-in` state if player has chips <= Ante/Blind', () => {
-        let player = new Player(game);
+        const player = new Player(game);
+        game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_ante();
         expect(player.is('All-in')).toBe(true);
         player.reset();
+        game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_small_blind();
         expect(player.is('All-in')).toBe(true);
         player.reset();
+        game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_big_blind();
@@ -149,9 +155,10 @@ describe('state', () => {
 
     it('should remain at `Action` state if action is invalid', () => {
         const player = new Player(game);
+        game.bet = 0;
         player.chips = 100;
         player.seat();
-        player.charge_big_blind();
+        game.bet = 10;
         player.action();
         player.check();
         expect(player.is('Action')).toBe(true);
