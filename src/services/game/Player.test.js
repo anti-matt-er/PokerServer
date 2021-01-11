@@ -128,14 +128,12 @@ describe('state', () => {
         player.seat();
         player.charge_ante();
         expect(player.is('All-in')).toBe(true);
-        player.quit();
-        player = new Player(game);
+        player.reset();
         player.chips = 5;
         player.seat();
         player.charge_small_blind();
         expect(player.is('All-in')).toBe(true);
-        player.quit();
-        player = new Player(game);
+        player.reset();
         player.chips = 5;
         player.seat();
         player.charge_big_blind();
