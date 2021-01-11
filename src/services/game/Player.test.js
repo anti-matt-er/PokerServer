@@ -169,4 +169,36 @@ describe('state', () => {
         player.fold();
         expect(player.is('Action')).toBe(true);
     });
+
+    it('should transition to `Idle` state if action is valid', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 10;
+        player.call();
+        expect(player.is('Idle')).toBe(true);
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        player.raise(20);
+        expect(player.is('Idle')).toBe(true);
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        game.bet = 10;
+        player.bet = 10;
+        player.action();
+        player.check();
+        expect(player.is('Idle')).toBe(true);
+        player.reset();
+        player.seat();
+        player.action();
+        player.fold();
+        expect(player.is('Idle')).toBe(true);
+    });
 });
