@@ -86,3 +86,68 @@ describe('game', () => {
         }).toThrow('Game object must be provided');
     });
 });
+
+describe('state', () => {
+    it('should initialise with `Seating` state', () => {
+        const player = new Player(game);
+        expect(player.is('Seating')).toBe(true);
+    });
+
+    it('should transition to `Idle` state when seated', () => {
+        const player = new Player(game);
+        player.seat();
+        expect(player.is('Idle')).toBe(true);
+    });
+
+    it('should remain at `Idle` state if player has enough chips for Ante/Blind', () => {
+        let player = new Player(game);
+        player.chips = 100;
+        player.seat();
+        player.charge_ante();
+        expect(player.is('Idle')).toBe(true);
+        player = new Player(game);
+        player.chips = 100;
+        player.seat();
+        player.charge_small_blind();
+        expect(player.is('Idle')).toBe(true);
+        player = new Player(game);
+        player.chips = 100;
+        player.seat();
+        player.charge_big_blind();
+        expect(player.is('Idle')).toBe(true);
+    });
+
+    it('should transition to `All-in` state if player has chips <= Ante/Blind', () => {
+        let player = new Player(game);
+        player.chips = 5;
+        player.seat();
+        player.charge_ante();
+        expect(player.is('All-in')).toBe(true);
+        player.quit();
+        player = new Player(game);
+        player.chips = 5;
+        player.seat();
+        player.charge_small_blind();
+        expect(player.is('All-in')).toBe(true);
+        player.quit();
+        player = new Player(game);
+        player.chips = 5;
+        player.seat();
+        player.charge_big_blind();
+        expect(player.is('All-in')).toBe(true);
+    });
+
+    it('should transition to `Action` state when action is on player', () => {
+        const player = new Player(game);
+        player.seat();
+        player.action();
+        expect(player.is('Action')).toBe(true);
+    });
+
+    it('should remain at `Action` state if action is invalid', () => {
+        const player = new Player(game);
+        player.seat();
+        player.action();
+        player.check();
+    });
+});
