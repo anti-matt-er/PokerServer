@@ -88,6 +88,8 @@ describe('game', () => {
 });
 
 describe('state', () => {
+    const game = new Game();
+    
     it('should initialise with `Seating` state', () => {
         const player = new Player(game);
         expect(player.is('Seating')).toBe(true);
