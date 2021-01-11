@@ -71,18 +71,18 @@ describe('game', () => {
     it('should fail if no Game object is provided', () => {
         expect(() => {
             const player = new Player();
-        }).toThrow('must provide a Game object');
+        }).toThrow('Game object must be provided');
     
         expect(() => {
             const player = new Player('not a Game object');
-        }).toThrow('must provide a Game object');
+        }).toThrow('Game object must be provided');
 
         expect(() => {
             const player = new Player(123);
-        }).toThrow('must provide a Game object');
+        }).toThrow('Game object must be provided');
 
         expect(() => {
             const player = new Player({});
-        }).toThrow('must provide a Game object');
+        }).toThrow('Game object must be provided');
     });
 });
