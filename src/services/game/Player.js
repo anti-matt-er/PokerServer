@@ -2,9 +2,13 @@
 
 import { Card } from './Card';
 import { Game } from './Game';
+const StateMachine = require('javascript-state-machine');
 
-class Player {
+class Player extends StateMachine {
     constructor(game) {
+        super({
+            init: 'Seating'
+        });
         if (!(game instanceof Game)) {
             throw 'Error: A Game object must be provided';
         }
