@@ -92,7 +92,7 @@ describe('state', () => {
     game.ante = 5;
     game.small_blind = 10;
     game.big_blind = 20;
-    
+
     it('should initialise with `Seating` state', () => {
         const player = new Player(game);
         expect(player.is('Seating')).toBe(true);
@@ -151,8 +151,17 @@ describe('state', () => {
 
     it('should remain at `Action` state if action is invalid', () => {
         const player = new Player(game);
+        player.chips = 100;
         player.seat();
+        player.charge_big_blind();
         player.action();
         player.check();
+        expect(player.is('Action')).toBe(true);
+        player.reset();
+        player.seat();
+        player.charge_big_blind();
+        player.action();
+        player.fold();
+        expect(player.is('Action')).toBe(true);
     });
 });
