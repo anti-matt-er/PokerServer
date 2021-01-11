@@ -83,7 +83,7 @@ class Player extends StateMachine {
     }
 
     check() {
-        if (this.bet === 0) {
+        if (this.game.bet === this.bet) {
             this.act();
         }
     }
