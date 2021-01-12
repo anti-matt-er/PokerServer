@@ -269,6 +269,15 @@ describe('state', () => {
         expect(player.is('Idle')).toBe(true);
     });
 
+    it('should transition to `Idle` state when new orbit starts if player has folded', () => {
+        const player = new Player(game);
+        player.seat();
+        player.action();
+        player.fold();
+        player.new_orbit();
+        expect(player.is('Idle')).toBe(true);
+    });
+
     it('should transition to `Quit` state if chosen from `Idle`, `Re-buy` or `Out`', () => {
         const player = new Player(game);
         game.bet = 0;
