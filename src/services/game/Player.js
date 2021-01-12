@@ -15,6 +15,7 @@ class Player extends StateMachine {
                 { name: 'seat', from: 'Seating', to: 'Idle' },
                 { name: 'action', from: 'Idle', to: 'Action' },
                 { name: 'act', from: 'Action', to: 'Idle' },
+                { name: 'out', from: 'Action', to: 'Out' },
                 { name: 'allin', from: ['Idle', 'Action'], to: 'All-in' },
                 { name: 'reset', from: '*', to: 'Seating' },
                 { name: 'win', from: ['Idle', 'All-in'], to: 'Idle' },
@@ -107,9 +108,9 @@ class Player extends StateMachine {
     }
 
     fold() {
-        if (this.can('act')) {
+        if (this.can('out')) {
             if (!this.bb) {
-                this.act();
+                this.out();
             }
         }
     }
