@@ -201,4 +201,31 @@ describe('state', () => {
         player.fold();
         expect(player.is('Idle')).toBe(true);
     });
+
+    it('should transition to `All-in` state if call/raise spends all chips', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 100;
+        player.call();
+        expect(player.is('All-in')).toBe(true);
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 200;
+        player.call();
+        expect(player.is('All-in')).toBe(true);
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 20;
+        player.raise(100);
+        expect(player.is('All-in')).toBe(true);
+    });
 });
