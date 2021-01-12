@@ -269,12 +269,12 @@ describe('state', () => {
         expect(player.is('Idle')).toBe(true);
     });
 
-    it('should transition to `Idle` state when new orbit starts if player has folded', () => {
+    it('should transition to `Idle` state when new hand starts if player has folded', () => {
         const player = new Player(game);
         player.seat();
         player.action();
         player.fold();
-        player.new_orbit();
+        player.next();
         expect(player.is('Idle')).toBe(true);
     });
 
