@@ -20,8 +20,9 @@ class Player extends StateMachine {
                 { name: 'reset', from: '*', to: 'Seating' },
                 { name: 'win', from: ['Idle', 'All-in'], to: 'Idle' },
                 { name: 'lose', from: 'All-in', to: 'Re-buy' },
+                { name: 'next', from: 'Out', to: 'Idle' },
                 { name: 'rebuy', from: 'Re-buy', to: 'Idle' },
-                { name: 'quit', from: ['Idle', 'Re-buy'], to: 'Quit' }
+                { name: 'quit', from: ['Idle', 'Out', 'Re-buy'], to: 'Quit' }
             ],
             methods: {
                 onReset: () => {
