@@ -69,7 +69,7 @@ describe('hand', () => {
 
 describe('game', () => {
     const game = new Game();
-    
+
     it('should fail if no Game object is provided', () => {
         expect(() => {
             const player = new Player();
@@ -118,6 +118,42 @@ describe('game', () => {
         player.action();
         player.fold();
         expect(player.last_action).toEqual('Fold');
+    });
+
+    it('should forget last action when action is on player', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 10;
+        player.call();
+        player.action();
+        expect(player.last_action).toBeNull();
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        player.raise(20);
+        player.action();
+        expect(player.last_action).toBeNull();
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        game.bet = 10;
+        player.bet = 10;
+        player.action();
+        player.check();
+        player.action();
+        expect(player.last_action).toBeNull();
+        player.reset();
+        player.seat();
+        player.action();
+        player.fold();
+        player.action();
+        expect(player.last_action).toBeNull();
     });
 });
 
