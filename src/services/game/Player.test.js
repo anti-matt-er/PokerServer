@@ -228,4 +228,28 @@ describe('state', () => {
         player.raise(100);
         expect(player.is('All-in')).toBe(true);
     });
+
+    it('should transition to `Idle` state if player wins showdown', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 20;
+        player.raise(100);
+        player.win();
+        expect(player.is('Idle')).toBe(true);
+    });
+
+    it('should transition to `Re-buy` state if player loses showdown', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 20;
+        player.raise(100);
+        player.lose();
+        expect(player.is('Re-buy')).toBe(true);
+    });
 });
