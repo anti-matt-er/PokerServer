@@ -75,22 +75,32 @@ class Player extends StateMachine {
     }
 
     call() {
-        this.act();
+        this.charge(this.game.bet);
+        if (this.can('act')) {
+            this.act();
+        }
     }
 
-    raise() {
-        this.act();
+    raise(amount) {
+        this.charge(amount);
+        if (this.can('act')) {
+            this.act();
+        }
     }
 
     check() {
         if (this.game.bet === this.bet) {
-            this.act();
+            if (this.can('act')) {
+                this.act();
+            }
         }
     }
 
     fold() {
         if (!this.bb) {
-            this.act();
+            if (this.can('act')) {
+                this.act();
+            }
         }
     }
 
