@@ -265,4 +265,21 @@ describe('state', () => {
         player.rebuy();
         expect(player.is('Idle')).toBe(true);
     });
+
+    it('should transition to `Quit` state if chosen from `Idle` or `Re-buy`', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 20;
+        player.raise(100);
+        player.lose();
+        player.quit();
+        expect(player.is('Quit')).toBe(true);
+        player.reset();
+        player.seat();
+        player.quit();
+        expect(player.is('Quit')).toBe(true);
+    });
 });
