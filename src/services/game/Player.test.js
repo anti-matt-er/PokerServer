@@ -85,6 +85,38 @@ describe('game', () => {
             const player = new Player({});
         }).toThrow('Game object must be provided');
     });
+
+    it('should keep track of previous action', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 10;
+        player.call();
+        expect(player.last_action).toEqual('Call');
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        player.raise(20);
+        expect(player.last_action).toEqual('Raise');
+        player.reset();
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        game.bet = 10;
+        player.bet = 10;
+        player.action();
+        player.check();
+        expect(player.last_action).toEqual('Check');
+        player.reset();
+        player.seat();
+        player.action();
+        player.fold();
+        expect(player.last_action).toEqual('Fold');
+    });
 });
 
 describe('state', () => {
