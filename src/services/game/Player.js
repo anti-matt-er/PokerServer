@@ -78,31 +78,37 @@ class Player extends StateMachine {
         this.bb = true;
     }
 
-    call() {
-        this.charge(this.game.bet);
+    act_if_possible() {
         if (this.can('act')) {
             this.act();
+        }
+    }
+
+    call() {
+        if (this.can('act')) {
+            this.charge(this.game.bet);
+            this.act_if_possible();
         }
     }
 
     raise(amount) {
-        this.charge(amount);
         if (this.can('act')) {
-            this.act();
+            this.charge(amount);
+            this.act_if_possible();
         }
     }
 
     check() {
-        if (this.game.bet === this.bet) {
-            if (this.can('act')) {
+        if (this.can('act')) {
+            if (this.game.bet === this.bet) {
                 this.act();
             }
         }
     }
 
     fold() {
-        if (!this.bb) {
-            if (this.can('act')) {
+        if (this.can('act')) {
+            if (!this.bb) {
                 this.act();
             }
         }
