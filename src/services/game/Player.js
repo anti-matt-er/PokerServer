@@ -29,6 +29,7 @@ class Player extends StateMachine {
                     this.hand = [];
                     this.bet = 0;
                     this.bb = false;
+                    this.last_action = null;
                 }
             }
         });
@@ -89,6 +90,7 @@ class Player extends StateMachine {
     call() {
         if (this.can('act')) {
             this.charge(this.game.bet);
+            this.last_action = 'Call';
             this.act_if_possible();
         }
     }
@@ -96,6 +98,7 @@ class Player extends StateMachine {
     raise(amount) {
         if (this.can('act')) {
             this.charge(amount);
+            this.last_action = 'Raise';
             this.act_if_possible();
         }
     }
@@ -103,6 +106,7 @@ class Player extends StateMachine {
     check() {
         if (this.can('act')) {
             if (this.game.bet === this.bet) {
+                this.last_action = 'Check';
                 this.act();
             }
         }
@@ -111,6 +115,7 @@ class Player extends StateMachine {
     fold() {
         if (this.can('out')) {
             if (!this.bb) {
+                this.last_action = 'Fold';
                 this.out();
             }
         }
