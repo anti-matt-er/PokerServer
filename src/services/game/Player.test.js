@@ -269,7 +269,7 @@ describe('state', () => {
         expect(player.is('Idle')).toBe(true);
     });
 
-    it('should transition to `Quit` state if chosen from `Idle` or `Re-buy`', () => {
+    it('should transition to `Quit` state if chosen from `Idle`, `Re-buy` or `Out`', () => {
         const player = new Player(game);
         game.bet = 0;
         player.chips = 100;
@@ -282,6 +282,12 @@ describe('state', () => {
         expect(player.is('Quit')).toBe(true);
         player.reset();
         player.seat();
+        player.quit();
+        expect(player.is('Quit')).toBe(true);
+        player.reset()
+        player.seat();
+        player.action();
+        player.fold();
         player.quit();
         expect(player.is('Quit')).toBe(true);
     });
