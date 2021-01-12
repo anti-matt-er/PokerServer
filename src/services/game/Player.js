@@ -16,7 +16,11 @@ class Player extends StateMachine {
                 { name: 'action', from: 'Idle', to: 'Action' },
                 { name: 'act', from: 'Action', to: 'Idle' },
                 { name: 'allin', from: ['Idle', 'Action'], to: 'All-in' },
-                { name: 'reset', from: '*', to: 'Seating' }
+                { name: 'reset', from: '*', to: 'Seating' },
+                { name: 'win', from: ['Idle', 'All-in'], to: 'Idle' },
+                { name: 'lose', from: 'All-in', to: 'Re-buy' },
+                { name: 'rebuy', from: 'Re-buy', to: 'Idle' },
+                { name: 'quit', from: ['Idle', 'Re-buy'], to: 'Quit' }
             ],
             methods: {
                 onReset: () => {
@@ -102,10 +106,6 @@ class Player extends StateMachine {
                 this.act();
             }
         }
-    }
-
-    quit() {
-        
     }
 }
 exports.Player = Player;
