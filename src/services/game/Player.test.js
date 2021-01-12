@@ -152,6 +152,7 @@ describe('game', () => {
         player.seat();
         player.action();
         player.fold();
+        player.next();
         player.action();
         expect(player.last_action).toBeNull();
     });
