@@ -30,6 +30,9 @@ class Player extends StateMachine {
                     this.bet = 0;
                     this.bb = false;
                     this.last_action = null;
+                },
+                onAction: () => {
+                    this.last_action = null;
                 }
             }
         });
