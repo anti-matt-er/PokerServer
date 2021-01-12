@@ -68,6 +68,8 @@ describe('hand', () => {
 });
 
 describe('game', () => {
+    const game = new Game();
+    
     it('should fail if no Game object is provided', () => {
         expect(() => {
             const player = new Player();
