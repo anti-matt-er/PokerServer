@@ -195,11 +195,14 @@ describe('state', () => {
         player.action();
         player.check();
         expect(player.is('Idle')).toBe(true);
-        player.reset();
+    });
+
+    it('should transition to `Out` state if player folds', () => {
+        const player = new Player(game);
         player.seat();
         player.action();
         player.fold();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.is('Out')).toBe(true);
     });
 
     it('should transition to `All-in` state if call/raise spends all chips', () => {
