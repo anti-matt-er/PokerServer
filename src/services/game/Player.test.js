@@ -339,6 +339,7 @@ describe('state', () => {
         player.action();
         game.bet = 20;
         player.call();
+        player.allin(); //Forced, to mock game logic
         player.lose();
         expect(player.is('Lose')).toBe(true);
     });
