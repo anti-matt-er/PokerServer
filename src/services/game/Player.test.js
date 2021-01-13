@@ -369,6 +369,20 @@ describe('state', () => {
         expect(player.state).toEqual('Lose');
     });
 
+    it('should transition to `Win` state from `Idle` if player wins showdown', () => {
+        const player = new Player(game);
+        player.seat();
+        player.win();
+        expect(player.state).toEqual('Win');
+    });
+
+    it('should transition to `Lose` state from `Idle` if player loses showdown', () => {
+        const player = new Player(game);
+        player.seat();
+        player.lose();
+        expect(player.state).toEqual('Lose');
+    });
+
     it('should transition to `Idle` state when new hand starts if player has folded', () => {
         const player = new Player(game);
         player.seat();
