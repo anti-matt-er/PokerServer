@@ -355,7 +355,7 @@ describe('state', () => {
         expect(player.is('Re-buy')).toBe(true);
     });
 
-    it('should transition to `Idle` state if player chooses to rebuy', () => {
+    it('should transition to `Lose` state if player chooses to rebuy', () => {
         const player = new Player(game);
         game.bet = 0;
         player.chips = 100;
@@ -365,7 +365,7 @@ describe('state', () => {
         player.raise(100);
         player.lose();
         player.rebuy();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.is('Lose')).toBe(true);
     });
 
     it('should transition to `Idle` state when new hand starts if player has folded', () => {
