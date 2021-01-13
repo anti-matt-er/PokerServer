@@ -22,7 +22,7 @@ class Player extends StateMachine {
                 { name: 'lose', from: 'All-in', to: () => {
                     return (this.chips >= this.game.big_blind ? 'Lose' : 'Re-buy');
                 } },
-                { name: 'next', from: 'Out', to: 'Idle' },
+                { name: 'next', from: ['Win', 'Lose', 'Out'], to: 'Idle' },
                 { name: 'rebuy', from: 'Re-buy', to: 'Lose' },
                 { name: 'quit', from: ['Idle', 'Out', 'Re-buy'], to: 'Quit' },
                 { name: 'reinit', from: '*', to: 'Seating' }
