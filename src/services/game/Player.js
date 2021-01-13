@@ -28,6 +28,9 @@ class Player extends StateMachine {
                 onAction: () => {
                     this.last_action = null;
                 },
+                onNext: () => {
+                    this.reset();
+                },
                 onReinit: () => {
                     this.reset();
                 }
