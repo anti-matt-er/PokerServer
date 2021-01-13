@@ -182,13 +182,13 @@ describe('state', () => {
 
     it('should initialise with `Seating` state', () => {
         const player = new Player(game);
-        expect(player.is('Seating')).toBe(true);
+        expect(player.state).toEqual('Seating');
     });
 
     it('should transition to `Idle` state when seated', () => {
         const player = new Player(game);
         player.seat();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
     });
 
     it('should remain at `Idle` state if player has enough chips for Ante/Blind', () => {
@@ -197,19 +197,19 @@ describe('state', () => {
         player.chips = 100;
         player.seat();
         player.charge_ante();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_small_blind();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_big_blind();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
     });
 
     it('should transition to `All-in` state if player has chips <= Ante/Blind', () => {
@@ -218,26 +218,26 @@ describe('state', () => {
         player.chips = 5;
         player.seat();
         player.charge_ante();
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
         player.reinit();
         game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_small_blind();
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
         player.reinit();
         game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_big_blind();
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
     });
 
     it('should transition to `Action` state when action is on player', () => {
         const player = new Player(game);
         player.seat();
         player.action();
-        expect(player.is('Action')).toBe(true);
+        expect(player.state).toEqual('Action');
     });
 
     it('should remain at `Action` state if action is invalid', () => {
@@ -248,13 +248,13 @@ describe('state', () => {
         game.bet = 10;
         player.action();
         player.check();
-        expect(player.is('Action')).toBe(true);
+        expect(player.state).toEqual('Action');
         player.reinit();
         player.seat();
         player.charge_big_blind();
         player.action();
         player.fold();
-        expect(player.is('Action')).toBe(true);
+        expect(player.state).toEqual('Action');
     });
 
     it('should transition to `Idle` state if action is valid', () => {
@@ -265,14 +265,14 @@ describe('state', () => {
         player.action();
         game.bet = 10;
         player.call();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.action();
         player.raise(20);
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
@@ -281,7 +281,7 @@ describe('state', () => {
         player.bet = 10;
         player.action();
         player.check();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
     });
 
     it('should transition to `Out` state if player folds', () => {
@@ -289,7 +289,7 @@ describe('state', () => {
         player.seat();
         player.action();
         player.fold();
-        expect(player.is('Out')).toBe(true);
+        expect(player.state).toEqual('Out');
     });
 
     it('should transition to `All-in` state if call/raise spends all chips', () => {
@@ -300,7 +300,7 @@ describe('state', () => {
         player.action();
         game.bet = 100;
         player.call();
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
@@ -308,7 +308,7 @@ describe('state', () => {
         player.action();
         game.bet = 200;
         player.call();
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
         player.reinit();
         game.bet = 0;
         player.chips = 100;
@@ -316,7 +316,7 @@ describe('state', () => {
         player.action();
         game.bet = 20;
         player.raise(100);
-        expect(player.is('All-in')).toBe(true);
+        expect(player.state).toEqual('All-in');
     });
 
     it('should transition to `Win` state if player wins showdown', () => {
@@ -328,7 +328,7 @@ describe('state', () => {
         game.bet = 20;
         player.raise(100);
         player.win();
-        expect(player.is('Win')).toBe(true);
+        expect(player.state).toEqual('Win');
     });
 
     it('should transition to `Lose` state if player loses showdown with sufficient chips for BB', () => {
@@ -341,7 +341,7 @@ describe('state', () => {
         player.call();
         player.allin(); //Forced, to mock game logic
         player.lose();
-        expect(player.is('Lose')).toBe(true);
+        expect(player.state).toEqual('Lose');
     });
 
     it('should transition to `Re-buy` state if player loses showdown with insufficient chips for BB', () => {
@@ -353,7 +353,7 @@ describe('state', () => {
         game.bet = 20;
         player.raise(100);
         player.lose();
-        expect(player.is('Re-buy')).toBe(true);
+        expect(player.state).toEqual('Re-buy');
     });
 
     it('should transition to `Lose` state if player chooses to rebuy', () => {
@@ -366,7 +366,7 @@ describe('state', () => {
         player.raise(100);
         player.lose();
         player.rebuy();
-        expect(player.is('Lose')).toBe(true);
+        expect(player.state).toEqual('Lose');
     });
 
     it('should transition to `Idle` state when new hand starts if player has folded', () => {
@@ -375,7 +375,7 @@ describe('state', () => {
         player.action();
         player.fold();
         player.next();
-        expect(player.is('Idle')).toBe(true);
+        expect(player.state).toEqual('Idle');
     });
 
     it('should transition to `Quit` state if chosen from `Idle`, `Re-buy` or `Out`', () => {
@@ -388,16 +388,16 @@ describe('state', () => {
         player.raise(100);
         player.lose();
         player.quit();
-        expect(player.is('Quit')).toBe(true);
+        expect(player.state).toEqual('Quit');
         player.reinit();
         player.seat();
         player.quit();
-        expect(player.is('Quit')).toBe(true);
+        expect(player.state).toEqual('Quit');
         player.reinit()
         player.seat();
         player.action();
         player.fold();
         player.quit();
-        expect(player.is('Quit')).toBe(true);
+        expect(player.state).toEqual('Quit');
     });
 });
