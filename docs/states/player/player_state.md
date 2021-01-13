@@ -1,3 +1,3 @@
-#Player State
+# Player State
 
 ![Player State Diagram](diagram.png)
