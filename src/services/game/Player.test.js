@@ -392,6 +392,22 @@ describe('state', () => {
         expect(player.state).toEqual('Idle');
     });
 
+    it('should transition to `Idle` state when new hand starts if player wins showdown', () => {
+        const player = new Player(game);
+        player.seat();
+        player.win();
+        player.next();
+        expect(player.state).toEqual('Idle');
+    });
+
+    it('should transition to `Idle` state when new hand starts if player loses showdown', () => {
+        const player = new Player(game);
+        player.seat();
+        player.lose();
+        player.next();
+        expect(player.state).toEqual('Idle');
+    });
+
     it('should transition to `Quit` state if chosen from `Idle`, `Re-buy` or `Out`', () => {
         const player = new Player(game);
         game.bet = 0;
