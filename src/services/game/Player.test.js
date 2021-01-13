@@ -156,6 +156,22 @@ describe('game', () => {
         player.action();
         expect(player.last_action).toBeNull();
     });
+
+    it('should reset current hand data when new hand is played', () => {
+        const player = new Player(game);
+        game.bet = 0;
+        player.chips = 100;
+        player.seat();
+        player.action();
+        game.bet = 10;
+        player.call();
+        player.action();
+        player.fold();
+        player.next();
+        expect(player.bet).toEqual(0);
+        expect(player.bb).toBe(false);
+        expect(player.last_action).toBeNull();
+    });
 });
 
 describe('state', () => {
