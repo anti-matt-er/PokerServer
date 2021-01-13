@@ -17,28 +17,32 @@ class Player extends StateMachine {
                 { name: 'act', from: 'Action', to: 'Idle' },
                 { name: 'out', from: 'Action', to: 'Out' },
                 { name: 'allin', from: ['Idle', 'Action'], to: 'All-in' },
-                { name: 'reset', from: '*', to: 'Seating' },
                 { name: 'win', from: ['Idle', 'All-in'], to: 'Idle' },
                 { name: 'lose', from: 'All-in', to: 'Re-buy' },
                 { name: 'next', from: 'Out', to: 'Idle' },
                 { name: 'rebuy', from: 'Re-buy', to: 'Idle' },
-                { name: 'quit', from: ['Idle', 'Out', 'Re-buy'], to: 'Quit' }
+                { name: 'quit', from: ['Idle', 'Out', 'Re-buy'], to: 'Quit' },
+                { name: 'reinit', from: '*', to: 'Seating' }
             ],
             methods: {
-                onReset: () => {
-                    this.hand = [];
-                    this.bet = 0;
-                    this.bb = false;
-                    this.last_action = null;
-                },
                 onAction: () => {
                     this.last_action = null;
+                },
+                onReinit: () => {
+                    this.reset();
                 }
             }
         });
         this.game = game;
         this.chips = 0;
         this.reset();
+    }
+
+    reset() {
+        this.hand = [];
+        this.bet = 0;
+        this.bb = false;
+        this.last_action = null;
     }
 
     deal(cards) {

@@ -97,14 +97,14 @@ describe('game', () => {
         game.bet = 10;
         player.call();
         expect(player.last_action).toEqual('Call');
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.action();
         player.raise(20);
         expect(player.last_action).toEqual('Raise');
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -113,7 +113,7 @@ describe('game', () => {
         player.action();
         player.check();
         expect(player.last_action).toEqual('Check');
-        player.reset();
+        player.reinit();
         player.seat();
         player.action();
         player.fold();
@@ -130,7 +130,7 @@ describe('game', () => {
         player.call();
         player.action();
         expect(player.last_action).toBeNull();
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -138,7 +138,7 @@ describe('game', () => {
         player.raise(20);
         player.action();
         expect(player.last_action).toBeNull();
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -148,7 +148,7 @@ describe('game', () => {
         player.check();
         player.action();
         expect(player.last_action).toBeNull();
-        player.reset();
+        player.reinit();
         player.seat();
         player.action();
         player.fold();
@@ -182,13 +182,13 @@ describe('state', () => {
         player.seat();
         player.charge_ante();
         expect(player.is('Idle')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.charge_small_blind();
         expect(player.is('Idle')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -203,13 +203,13 @@ describe('state', () => {
         player.seat();
         player.charge_ante();
         expect(player.is('All-in')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 5;
         player.seat();
         player.charge_small_blind();
         expect(player.is('All-in')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 5;
         player.seat();
@@ -233,7 +233,7 @@ describe('state', () => {
         player.action();
         player.check();
         expect(player.is('Action')).toBe(true);
-        player.reset();
+        player.reinit();
         player.seat();
         player.charge_big_blind();
         player.action();
@@ -250,14 +250,14 @@ describe('state', () => {
         game.bet = 10;
         player.call();
         expect(player.is('Idle')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
         player.action();
         player.raise(20);
         expect(player.is('Idle')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -285,7 +285,7 @@ describe('state', () => {
         game.bet = 100;
         player.call();
         expect(player.is('All-in')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -293,7 +293,7 @@ describe('state', () => {
         game.bet = 200;
         player.call();
         expect(player.is('All-in')).toBe(true);
-        player.reset();
+        player.reinit();
         game.bet = 0;
         player.chips = 100;
         player.seat();
@@ -360,11 +360,11 @@ describe('state', () => {
         player.lose();
         player.quit();
         expect(player.is('Quit')).toBe(true);
-        player.reset();
+        player.reinit();
         player.seat();
         player.quit();
         expect(player.is('Quit')).toBe(true);
-        player.reset()
+        player.reinit()
         player.seat();
         player.action();
         player.fold();
