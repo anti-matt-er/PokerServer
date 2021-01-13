@@ -18,6 +18,7 @@ class Player extends StateMachine {
                 { name: 'out', from: 'Action', to: 'Out' },
                 { name: 'allin', from: ['Idle', 'Action'], to: 'All-in' },
                 { name: 'win', from: ['Idle', 'All-in'], to: 'Win' },
+                { name: 'lose', from: 'Idle', to: 'Lose' },
                 { name: 'lose', from: 'All-in', to: () => {
                     return (this.chips >= this.game.big_blind ? 'Lose' : 'Re-buy');
                 } },
