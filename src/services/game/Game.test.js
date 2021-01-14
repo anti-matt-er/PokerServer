@@ -180,12 +180,6 @@ describe('modes', () => {
             let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
             invalid_cash_game.structure.levels = [];
             new Game(invalid_cash_game);
-        }).not.toThrow('levels');
-
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [];
-            new Game(invalid_cash_game);
         }).toThrow('level');
 
         expect(() => {
