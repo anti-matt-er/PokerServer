@@ -216,7 +216,7 @@ describe('modes', () => {
 
 describe('state', () => {
     it('should initialise with `Seating` state', () => {
-        const game = new Game();
+        const game = new Game(modes.cash_game);
         expect(game.state).toEqual('Seating');
     });
 });
