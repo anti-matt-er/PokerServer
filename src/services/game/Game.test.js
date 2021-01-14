@@ -162,7 +162,7 @@ describe('modes', () => {
                 levels: null
             };
             new Game(invalid_cash_game);
-        }).not.toThrow('valid buy_in');
+        }).not.toThrow('valid structure');
 
         expect(() => {
             let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
