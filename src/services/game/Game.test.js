@@ -184,6 +184,12 @@ describe('modes', () => {
 
         expect(() => {
             let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+            invalid_cash_game.structure.levels = [false, 123, 'invalid'];
+            new Game(invalid_cash_game);
+        }).toThrow('valid level');
+
+        expect(() => {
+            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
             invalid_cash_game.structure.levels = [{}];
             new Game(invalid_cash_game);
         }).toThrow('valid level');
