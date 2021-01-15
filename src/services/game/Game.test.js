@@ -258,6 +258,24 @@ describe('validation', () => {
                 }).toThrow('seats');
             });
         });
+
+        it('should only retrieve valid seats', () => {
+            const game = new Game(modes.tournament);
+            for (let i = 0; i < modes.tournament.min_seats - 1; i++) {
+                game.seat(new Player(game));
+            }
+            expect(() => {
+                game.get_seat(0);
+            }).toThrow('invalid seat');
+            expect(() => {
+                game.get_seat(-1);
+            }).toThrow('invalid seat');
+            expect(() => {
+                game.get_seat(modes.tournament.seats + 1);
+            }).toThrow('invalid seat');
+            expect(game.get_seat(1)).toBeInstanceOf(Player);
+            expect(game.get_seat(modes.tournament.seats)).toBe(false);
+        });
     });
 });
 
