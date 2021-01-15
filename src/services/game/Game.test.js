@@ -56,171 +56,199 @@ const modes = {
     }
 }
 
-describe('modes', () => {
-    it('should reject invalid game modes', () => {
-        expect(() => {
-            new Game('invalid');
-        }).toThrow('valid game mode');
+const valid_modes = [
+    ['Cash Game', modes.cash_game],
+    ['Tournament', modes.tournament]
+];
 
-        expect(() => {
-            new Game({});
-        }).toThrow('valid game mode');
+describe('validation', () => {
+    describe('modes', () => {
+        it('should reject invalid game modes', () => {
+            expect(() => {
+                new Game('invalid');
+            }).toThrow('valid game mode');
 
-        expect(() => {
-            new Game(modes.empty);
-        }).not.toThrow('valid game mode');
+            expect(() => {
+                new Game({});
+            }).toThrow('valid game mode');
 
-        expect(() => {
-            new Game(modes.empty);
-        }).toThrow();
+            expect(() => {
+                new Game(modes.empty);
+            }).not.toThrow('valid game mode');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.seats = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('seats');
+            expect(() => {
+                new Game(modes.empty);
+            }).toThrow();
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.min_seats = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('min_seats');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.seats = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('seats');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.chips = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('chips');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.min_seats = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('min_seats');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.currency = ['invalid'];
-            new Game(invalid_cash_game);
-        }).toThrow('currency');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.chips = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('chips');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('buy_in');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.currency = ['invalid'];
+                new Game(invalid_cash_game);
+            }).toThrow('currency');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.rebuy = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('rebuy');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('buy_in');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure = 'invalid';
-            new Game(invalid_cash_game);
-        }).toThrow('structure');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.rebuy = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('rebuy');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in = {};
-            new Game(invalid_cash_game);
-        }).toThrow('valid buy_in');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure = 'invalid';
+                new Game(invalid_cash_game);
+            }).toThrow('structure');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in = {
-                units: null,
-                fixed_amount: null,
-                range: null
-            };
-            new Game(invalid_cash_game);
-        }).not.toThrow('valid buy_in');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in = {};
+                new Game(invalid_cash_game);
+            }).toThrow('valid buy_in');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in.units = null;
-            new Game(invalid_cash_game);
-        }).toThrow('units');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in = {
+                    units: null,
+                    fixed_amount: null,
+                    range: null
+                };
+                new Game(invalid_cash_game);
+            }).not.toThrow('valid buy_in');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in.fixed_amount = null;
-            new Game(invalid_cash_game);
-        }).toThrow('fixed_amount');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in.units = null;
+                new Game(invalid_cash_game);
+            }).toThrow('units');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.buy_in.range = null;
-            new Game(invalid_cash_game);
-        }).toThrow('range');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in.fixed_amount = null;
+                new Game(invalid_cash_game);
+            }).toThrow('fixed_amount');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure = {};
-            new Game(invalid_cash_game);
-        }).toThrow('valid structure');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.buy_in.range = null;
+                new Game(invalid_cash_game);
+            }).toThrow('range');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure = {
-                time: null,
-                levels: null
-            };
-            new Game(invalid_cash_game);
-        }).not.toThrow('valid structure');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure = {};
+                new Game(invalid_cash_game);
+            }).toThrow('valid structure');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.time = null;
-            new Game(invalid_cash_game);
-        }).toThrow('time');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure = {
+                    time: null,
+                    levels: null
+                };
+                new Game(invalid_cash_game);
+            }).not.toThrow('valid structure');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = null;
-            new Game(invalid_cash_game);
-        }).toThrow('levels');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.time = null;
+                new Game(invalid_cash_game);
+            }).toThrow('time');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [];
-            new Game(invalid_cash_game);
-        }).toThrow('valid level');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = null;
+                new Game(invalid_cash_game);
+            }).toThrow('levels');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [false, 123, 'invalid'];
-            new Game(invalid_cash_game);
-        }).toThrow('valid level');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [];
+                new Game(invalid_cash_game);
+            }).toThrow('valid level');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [{}];
-            new Game(invalid_cash_game);
-        }).toThrow('valid level');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [false, 123, 'invalid'];
+                new Game(invalid_cash_game);
+            }).toThrow('valid level');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [{ ante: null, bb: null }];
-            new Game(invalid_cash_game);
-        }).not.toThrow('valid level');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [{}];
+                new Game(invalid_cash_game);
+            }).toThrow('valid level');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [{ ante: null, bb: null }];
-            new Game(invalid_cash_game);
-        }).toThrow('ante');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [{ ante: null, bb: null }];
+                new Game(invalid_cash_game);
+            }).not.toThrow('valid level');
 
-        expect(() => {
-            let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
-            invalid_cash_game.structure.levels = [{ ante: 0, bb: null }];
-            new Game(invalid_cash_game);
-        }).toThrow('bb');
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [{ ante: null, bb: null }];
+                new Game(invalid_cash_game);
+            }).toThrow('ante');
+
+            expect(() => {
+                let invalid_cash_game = JSON.parse(JSON.stringify(modes.cash_game));
+                invalid_cash_game.structure.levels = [{ ante: 0, bb: null }];
+                new Game(invalid_cash_game);
+            }).toThrow('bb');
+        });
+    });
+
+    describe('seats', () => {
+        it('should not start a hand until minimum players are seated', () => {
+            test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+                const game = new Game(mode);
+                for (let i = 0; i < mode.min_seats - 1; i++) {
+                    game.seat(new Player(game));
+                }
+                expect(game.state).toEqual('Seating');
+                game.seat(new Player(game));
+                expect(game.state).toEqual('Ready');
+            });
+        });
+
+        it('should not allow more players than available seats', () => {
+            test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+                const game = new Game(mode);
+                for (let i = 0; i < mode.min_seats; i++) {
+                    game.seat(new Player(game));
+                }
+                expect(() => {
+                    game.seat(new Player(game));
+                }).toThrow('seats');
+            });
+        });
     });
 });
 
 describe('state', () => {
-    const valid_modes = [
-        ['Cash Game', modes.cash_game],
-        ['Tournament', modes.tournament]
-    ];
-
     it('should initialise with `Seating` state', () => {
         const game = new Game(modes.cash_game);
         expect(game.state).toEqual('Seating');
