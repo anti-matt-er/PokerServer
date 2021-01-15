@@ -38,6 +38,15 @@ class Game extends StateMachine {
     }
 
     get_seat(seat) {
+        if (
+            seat < 1 ||
+            seat > this.mode.seats
+        ) {
+            throw 'Error: invalid seat!';
+        }
+        if (seat > this.players.length) {
+            return false;
+        }
         return this.players[seat - 1];
     }
 
