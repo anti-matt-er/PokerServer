@@ -1,6 +1,7 @@
 'use strict';
 
 const StateMachine = require('javascript-state-machine');
+import { Player } from './Player';
 
 class Game extends StateMachine {
     constructor(mode) {
@@ -23,9 +24,15 @@ class Game extends StateMachine {
     }
 
     seat(player) {
+        if (!(player instanceof Player)) {
+            throw 'Error: `player` must be instance of Player!';
+        }
+        if (this.players.length >= this.mode.seats) {
+            throw 'Error: all seats are taken!';
+        }
         this.players.push(player);
         player.seat();
-        if (this.players.length >= this.mode.min_seats) {
+        if (this.can('ready') && this.players.length >= this.mode.min_seats) {
             this.ready();
         }
     }
