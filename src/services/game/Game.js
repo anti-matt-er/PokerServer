@@ -5,9 +5,61 @@ const StateMachine = require('javascript-state-machine');
 class Game extends StateMachine {
     constructor(mode) {
         super({
-            init: 'Seating'
+            init: 'Seating',
+            transitions: [
+                { name: 'ready', from: 'Seating', to: 'Ready' },
+                { name: 'wait', from: 'Ready', to: 'Seating' },
+                { name: 'start', from: 'Ready', to: 'Preflop' },
+                { name: 'orbit', from: 'Preflop', to: 'Flop' },
+                { name: 'orbit', from: 'Flop', to: 'Turn' },
+                { name: 'orbit', from: 'Turn', to: 'River' },
+                { name: 'orbit', from: 'River', to: 'Showdown' },
+                { name: 'finish', from: ['Preflop', 'Flop', 'Turn', 'River', 'Showdown'], to: 'Ready' },
+            ]
         });
         this.validate(mode);
+        this.mode = mode;
+        this.players = [];
+    }
+
+    seat(player) {
+        this.players.push(player);
+        player.seat();
+        if (this.players.length >= this.mode.min_seats) {
+            this.ready();
+        }
+    }
+
+    get_seat(seat) {
+        return this.players[seat - 1];
+    }
+
+    quit_player(player) {
+        this.players = this.players.filter((seat) => { return seat !== player; });
+        if (this.is('Ready') && this.players.length < this.mode.min_seats) {
+            this.wait();
+        }
+    }
+
+    notify() {
+        this.check_early_finish();
+    }
+
+    check_early_finish() {
+        let players_out = 0;
+        for (let player of this.players) {
+            if (player.is('Out')) {
+                players_out += 1;
+                if (players_out >= this.mode.min_seats - 1) {
+                    this.finish();
+                    return;
+                }
+            }
+        }
+    }
+
+    award_pot() {
+        this.finish();
     }
 
     validate(mode) {
