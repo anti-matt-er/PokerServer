@@ -285,7 +285,9 @@ describe('state', () => {
             }
             preflop_game.start();
             for (let i = 0; i < mode.min_seats - 1; i++) {
-                preflop_game.get_seat(i + 1).fold();
+                let player = preflop_game.get_seat(i + 1);
+                player.action();
+                player.fold();
             }
             expect(preflop_game.state).toEqual('Ready');
 
@@ -296,7 +298,9 @@ describe('state', () => {
             flop_game.start();
             flop_game.orbit();
             for (let i = 0; i < mode.min_seats - 1; i++) {
-                flop_game.get_seat(i + 1).fold();
+                let player = flop_game.get_seat(i + 1);
+                player.action();
+                player.fold();
             }
             expect(flop_game.state).toEqual('Ready');
 
@@ -308,7 +312,9 @@ describe('state', () => {
             turn_game.orbit();
             turn_game.orbit();
             for (let i = 0; i < mode.min_seats - 1; i++) {
-                turn_game.get_seat(i + 1).fold();
+                let player = turn_game.get_seat(i + 1);
+                player.action();
+                player.fold();
             }
             expect(turn_game.state).toEqual('Ready');
 
@@ -321,7 +327,9 @@ describe('state', () => {
             river_game.orbit();
             river_game.orbit();
             for (let i = 0; i < mode.min_seats - 1; i++) {
-                river_game.get_seat(i + 1).fold();
+                let player = river_game.get_seat(i + 1);
+                player.action();
+                player.fold();
             }
             expect(river_game.state).toEqual('Ready');
         });
