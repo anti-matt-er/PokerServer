@@ -250,7 +250,7 @@ describe('validation', () => {
         describe('should not allow more players than available seats', () => {
             test.each(valid_modes)('Game Mode: %s', (name, mode) => {
                 const game = new Game(mode);
-                for (let i = 0; i < mode.min_seats; i++) {
+                for (let i = 0; i < mode.seats; i++) {
                     game.seat(new Player(game));
                 }
                 expect(() => {
