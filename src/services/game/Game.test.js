@@ -226,13 +226,13 @@ describe('state', () => {
         expect(game.state).toEqual('Seating');
     });
 
-    describe('should transition to `Start Hand` state when required seats are fulfilled', () => {
+    describe('should transition to `Ready` state when required seats are fulfilled', () => {
         test.each(valid_modes)('Game Mode: %s', (name, mode) => {
             const game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
                 game.seat(new Player(game));
             }
-            expect(game.state).toEqual('Start Hand');
+            expect(game.state).toEqual('Ready');
         });
     });
 
@@ -248,7 +248,7 @@ describe('state', () => {
         });
     });
 
-    describe('should transition to `Preflop` state from `Start Hand` when hand starts', () => {
+    describe('should transition to `Preflop` state from `Ready` when hand starts', () => {
         test.each(valid_modes)('Game Mode: %s', (name, mode) => {
             const game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -277,7 +277,7 @@ describe('state', () => {
         });
     });
 
-    describe('should transition to `Start Hand` when all but 1 players fold from any street', () => {
+    describe('should transition to `Ready` when all but 1 players fold from any street', () => {
         test.each(valid_modes)('Game Mode: %s', (name, mode) => {
             const preflop_game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -287,7 +287,7 @@ describe('state', () => {
             for (let i = 0; i < mode.min_seats - 1; i++) {
                 preflop_game.get_seat(i + 1).fold();
             }
-            expect(preflop_game.state).toEqual('Start Hand');
+            expect(preflop_game.state).toEqual('Ready');
 
             const flop_game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -298,7 +298,7 @@ describe('state', () => {
             for (let i = 0; i < mode.min_seats - 1; i++) {
                 flop_game.get_seat(i + 1).fold();
             }
-            expect(flop_game.state).toEqual('Start Hand');
+            expect(flop_game.state).toEqual('Ready');
 
             const turn_game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -310,7 +310,7 @@ describe('state', () => {
             for (let i = 0; i < mode.min_seats - 1; i++) {
                 turn_game.get_seat(i + 1).fold();
             }
-            expect(turn_game.state).toEqual('Start Hand');
+            expect(turn_game.state).toEqual('Ready');
 
             const river_game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -323,11 +323,11 @@ describe('state', () => {
             for (let i = 0; i < mode.min_seats - 1; i++) {
                 river_game.get_seat(i + 1).fold();
             }
-            expect(river_game.state).toEqual('Start Hand');
+            expect(river_game.state).toEqual('Ready');
         });
     });
 
-    describe('should transition to `Start Hand` when pot is awarded at showdown', () => {
+    describe('should transition to `Ready` when pot is awarded at showdown', () => {
         test.each(valid_modes)('Game Mode: %s', (name, mode) => {
             const game = new Game(mode);
             for (let i = 0; i < mode.min_seats; i++) {
@@ -338,7 +338,7 @@ describe('state', () => {
             game.orbit();
             game.orbit();
             game.award_pot();
-            expect(game.state).toEqual('Start Hand');
+            expect(game.state).toEqual('Ready');
         });
     });
 });
