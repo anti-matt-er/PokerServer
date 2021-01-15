@@ -2,6 +2,7 @@
 
 const StateMachine = require('javascript-state-machine');
 import { Player } from './Player';
+import { Deck } from './Deck';
 
 class Game extends StateMachine {
     constructor(mode) {
@@ -28,6 +29,10 @@ class Game extends StateMachine {
                         player.reset();
                     }
                 },
+                onEnterReady: () => {
+                    this.deck.reset();
+                    this.deck.shuffle();
+                }
             }
         });
         this.validate(mode);
