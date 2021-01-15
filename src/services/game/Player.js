@@ -36,6 +36,12 @@ class Player extends StateMachine {
                 },
                 onReinit: () => {
                     this.reset();
+                },
+                onQuit: () => {
+                    game.quit_player(this);
+                },
+                onEnterOut: () => {
+                    game.notify();
                 }
             }
         });
