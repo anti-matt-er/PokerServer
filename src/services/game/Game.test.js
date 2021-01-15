@@ -235,7 +235,7 @@ describe('validation', () => {
             }).not.toThrow();
         });
 
-        it('should not start a hand until minimum players are seated', () => {
+        describe('should not start a hand until minimum players are seated', () => {
             test.each(valid_modes)('Game Mode: %s', (name, mode) => {
                 const game = new Game(mode);
                 for (let i = 0; i < mode.min_seats - 1; i++) {
@@ -247,7 +247,7 @@ describe('validation', () => {
             });
         });
 
-        it('should not allow more players than available seats', () => {
+        describe('should not allow more players than available seats', () => {
             test.each(valid_modes)('Game Mode: %s', (name, mode) => {
                 const game = new Game(mode);
                 for (let i = 0; i < mode.min_seats; i++) {
