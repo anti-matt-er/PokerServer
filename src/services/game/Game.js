@@ -16,11 +16,24 @@ class Game extends StateMachine {
                 { name: 'orbit', from: 'Turn', to: 'River' },
                 { name: 'orbit', from: 'River', to: 'Showdown' },
                 { name: 'finish', from: ['Preflop', 'Flop', 'Turn', 'River', 'Showdown'], to: 'Ready' },
-            ]
+            ],
+            methods: {
+                onPreflop: () => {
+                    for(let player of this.players) {
+                        this.deck.deal(player);
+                    }
+                },
+                onFinish: () => {
+                    for(let player of this.players) {
+                        player.reset();
+                    }
+                },
+            }
         });
         this.validate(mode);
         this.mode = mode;
         this.players = [];
+        this.deck = new Deck();
     }
 
     seat(player) {
