@@ -132,6 +132,10 @@ describe('deck', () => {
     });
 
     describe('deal', () => {
+        jest.spyOn(Game.prototype, 'validate').mockImplementation(() => {}); //don't validate gamemodes, for cleaner testing
+        afterAll(() => {
+            jest.restoreAllMocks();
+        });
         const game = new Game();
         const deck = new Deck();
         let players = [

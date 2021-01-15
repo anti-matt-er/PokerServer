@@ -5,6 +5,10 @@ import { Card } from './Card';
 import { Game } from './Game';
 
 describe('hand', () => {
+    jest.spyOn(Game.prototype, 'validate').mockImplementation(() => {}); //don't validate gamemodes, for cleaner testing
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
     const card_KH = new Card('KH');
     const card_AS = new Card('AS');
     const card_TD = new Card('TD');
@@ -68,6 +72,10 @@ describe('hand', () => {
 });
 
 describe('game', () => {
+    jest.spyOn(Game.prototype, 'validate').mockImplementation(() => {}); //don't validate gamemodes, for cleaner testing
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
     const game = new Game();
 
     it('should fail if no Game object is provided', () => {
@@ -175,6 +183,10 @@ describe('game', () => {
 });
 
 describe('state', () => {
+    jest.spyOn(Game.prototype, 'validate').mockImplementation(() => {}); //don't validate gamemodes, for cleaner testing
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
     const game = new Game();
     game.ante = 5;
     game.small_blind = 10;
