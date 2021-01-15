@@ -79,7 +79,7 @@ class Game extends StateMachine {
         for (let player of this.players) {
             if (player.is('Out')) {
                 players_out += 1;
-                if (players_out >= this.mode.min_seats - 1) {
+                if (players_out >= this.players.length - 1) {
                     this.finish();
                     return;
                 }
