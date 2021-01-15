@@ -2,6 +2,7 @@
 
 import { Game } from './Game';
 import { Player } from './Player';
+import { Deck } from './Deck';
 
 const modes = {
     cash_game: {
@@ -407,5 +408,51 @@ describe('state', () => {
             game.award_pot();
             expect(game.state).toEqual('Ready');
         });
+    });
+});
+
+describe('general', () => {
+    it('should assign each player a hand at preflop', () => {
+        const game = new Game(modes.cash_game);
+        for (let i = 0; i < modes.cash_game.seats; i++) {
+            game.seat(new Player(game));
+        }
+        game.start();
+        for (let player of game.players) {
+            expect(player.hand).toHaveLength(2);
+        }
+    });
+
+    it('should reset each player every hand', () => {
+        const game = new Game(modes.cash_game);
+        for (let i = 0; i < modes.cash_game.seats; i++) {
+            game.seat(new Player(game));
+        }
+        game.start();
+        for (let i = 0; i < modes.cash_game.seats - 1; i++) {
+            let player = game.get_seat(i + 1);
+            player.action();
+            player.fold();
+        }
+        for (let player of game.players) {
+            expect(player.hand).toEqual([]);
+        }
+    });
+
+    it('should shuffle the deck on every new hand', () => {
+        const game = new Game(modes.cash_game);
+        const fake_deck = new Deck();
+        const deck_shuffle = jest.spyOn(fake_deck, 'shuffle');
+        game.deck = fake_deck;
+        for (let i = 0; i < modes.cash_game.seats; i++) {
+            game.seat(new Player(game));
+        }
+        game.start();
+        game.orbit();
+        game.orbit();
+        game.orbit();
+        game.award_pot();
+        expect(deck_shuffle).toBeCalledTimes(2);
+        deck_shuffle.mockRestore();
     });
 });
