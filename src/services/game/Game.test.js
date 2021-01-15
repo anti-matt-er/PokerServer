@@ -222,6 +222,19 @@ describe('validation', () => {
     });
 
     describe('seats', () => {
+        it('should only seat instances of Player', () => {
+            const game = new Game(modes.cash_game);
+            expect(() => {
+                game.seat('invalid');
+            }).toThrow('Player');
+            expect(() => {
+                game.seat({});
+            }).toThrow('Player');
+            expect(() => {
+                game.seat(new Player(game));
+            }).not.toThrow();
+        });
+
         it('should not start a hand until minimum players are seated', () => {
             test.each(valid_modes)('Game Mode: %s', (name, mode) => {
                 const game = new Game(mode);
