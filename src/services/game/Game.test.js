@@ -1,6 +1,7 @@
 'use strict';
 
 import { Game } from './Game';
+import { Player } from './Player';
 
 const modes = {
     cash_game: {
@@ -215,8 +216,129 @@ describe('modes', () => {
 });
 
 describe('state', () => {
+    const valid_modes = [
+        ['Cash Game', modes.cash_game],
+        ['Tournament', modes.tournament]
+    ];
+
     it('should initialise with `Seating` state', () => {
         const game = new Game(modes.cash_game);
         expect(game.state).toEqual('Seating');
+    });
+
+    describe('should transition to `Start Hand` state when required seats are fulfilled', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                game.seat(new Player(game));
+            }
+            expect(game.state).toEqual('Start Hand');
+        });
+    });
+
+    describe('should transition to `Seating` state when number of players fall below the minimum seats', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                game.seat(new Player(game));
+            }
+            let last_player = game.get_seat(mode.min_seats);
+            last_player.quit();
+            expect(game.state).toEqual('Seating');
+        });
+    });
+
+    describe('should transition to `Preflop` state from `Start Hand` when hand starts', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                game.seat(new Player(game));
+            }
+            game.start();
+            expect(game.state).toEqual('Preflop');
+        });
+    });
+
+    describe('should transition to each street state when an orbit is complete', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                game.seat(new Player(game));
+            }
+            game.start();
+            game.orbit();
+            expect(game.state).toEqual('Flop');
+            game.orbit();
+            expect(game.state).toEqual('Turn');
+            game.orbit();
+            expect(game.state).toEqual('River');
+            game.orbit();
+            expect(game.state).toEqual('Showdown');
+        });
+    });
+
+    describe('should transition to `Start Hand` when all but 1 players fold from any street', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const preflop_game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                preflop_game.seat(new Player(preflop_game));
+            }
+            preflop_game.start();
+            for (let i = 0; i < mode.min_seats - 1; i++) {
+                preflop_game.get_seat(i + 1).fold();
+            }
+            expect(preflop_game.state).toEqual('Start Hand');
+
+            const flop_game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                flop_game.seat(new Player(flop_game));
+            }
+            flop_game.start();
+            flop_game.orbit();
+            for (let i = 0; i < mode.min_seats - 1; i++) {
+                flop_game.get_seat(i + 1).fold();
+            }
+            expect(flop_game.state).toEqual('Start Hand');
+
+            const turn_game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                turn_game.seat(new Player(turn_game));
+            }
+            turn_game.start();
+            turn_game.orbit();
+            turn_game.orbit();
+            for (let i = 0; i < mode.min_seats - 1; i++) {
+                turn_game.get_seat(i + 1).fold();
+            }
+            expect(turn_game.state).toEqual('Start Hand');
+
+            const river_game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                river_game.seat(new Player(river_game));
+            }
+            river_game.start();
+            river_game.orbit();
+            river_game.orbit();
+            river_game.orbit();
+            for (let i = 0; i < mode.min_seats - 1; i++) {
+                river_game.get_seat(i + 1).fold();
+            }
+            expect(river_game.state).toEqual('Start Hand');
+        });
+    });
+
+    describe('should transition to `Start Hand` when pot is awarded at showdown', () => {
+        test.each(valid_modes)('Game Mode: %s', (name, mode) => {
+            const game = new Game(mode);
+            for (let i = 0; i < mode.min_seats; i++) {
+                game.seat(new Player(game));
+            }
+            game.start();
+            game.orbit();
+            game.orbit();
+            game.orbit();
+            game.award_pot();
+            expect(game.state).toEqual('Start Hand');
+        });
     });
 });
